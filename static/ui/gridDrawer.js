@@ -1,5 +1,6 @@
-class GridDrawer {
+class GridDrawer extends UiElement {
 	constructor(grid) {
+		super();
 		this.grid = grid;
 	}
 

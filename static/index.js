@@ -22,6 +22,7 @@ function setup() {
 	gridDrawer = new GridDrawer(mainGrid);
 	split.children[0] = gridDrawer;
 	hotbar = new Hotbar(structureTypes, Object.keys(structureTypes));
+	hotbar.onMousePressed = hotbarClicked;
 	split.children[2] = hotbar;
 
 	ui = new Ui(30, 30, width - 60, height - 60, split);
@@ -31,4 +32,12 @@ function draw() {
 	background(51);
 
 	ui.draw();
+}
+
+function mousePressed() {
+	ui.mousePressed(mouseX, mouseY);
+}
+
+function hotbarClicked(idx) {
+	hotbar.selectedIdx = idx;
 }
