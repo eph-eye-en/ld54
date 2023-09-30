@@ -17,6 +17,11 @@ class Grid {
 	}
 	
 	getCell(x, y) {
+		if(x < 0 || x >= this.width
+		|| y < 0 || y >= this.height)
+			return {
+				valid: false,
+			};
 		return this.cells[x][y];
 	}
 
