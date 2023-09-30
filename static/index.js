@@ -16,17 +16,17 @@ function setup() {
 	createCanvas(500, 500);
 	structureTypes = parseStructureTypes(mainGrid);
 
-	let split = new Split(SPLIT_VERT, [0.7, 0.1, 0.2]);
+	let stack = new Stack(STACK_VERT, [0.7, 0.1, 0.2]);
 
 	hotbar = new Hotbar(structureTypes, hotbarItems);
-	hotbar.onMousePressed = hotbarClicked;
-	split.children[2] = hotbar;
+	hotbar.onMousePressed = hotbarPressed;
+	stack.children[2] = hotbar;
 
 	gridDrawer = new GridDrawer(mainGrid, getSelectedStructure());
-	gridDrawer.onMousePressed = gridCellClicked;
-	split.children[0] = gridDrawer;
+	gridDrawer.onMousePressed = gridCellPressed;
+	stack.children[0] = gridDrawer;
 
-	ui = new Ui(30, 30, width - 60, height - 60, split);
+	ui = new Ui(30, 30, width - 60, height - 60, stack);
 }
 
 function draw() {
@@ -35,7 +35,7 @@ function draw() {
 	ui.draw();
 }
 
-function mousePressed() {
+function mousePressed(event) {
 	ui.mousePressed(mouseX, mouseY);
 
 	if(mouseX >= 0 && mouseX < width
@@ -43,11 +43,11 @@ function mousePressed() {
 		return false;
 }
 
-function hotbarClicked(idx) {
+function hotbarPressed(idx) {
 	hotbar.selectedIdx = idx;
 }
 
-function gridCellClicked(cx, cy) {
+function gridCellPressed(cx, cy) {
 	mainGrid.placeAt(cx, cy, getSelectedStructure());
 }
 

@@ -1,11 +1,11 @@
-const SPLIT_HORIZ = false;
-const SPLIT_VERT = true;
+const STACK_HORIZ = false;
+const STACK_VERT = true;
 
-class Split extends UiElement {
-	constructor(vertical, weightings) {
+class Stack extends UiElement {
+	constructor(direction, weightings) {
 		super();
 
-		this.vertical = vertical;
+		this.direction = direction;
 		this.weightings = weightings;
 
 		this.children = this.weightings.map(() => null);
@@ -27,8 +27,8 @@ class Split extends UiElement {
 		let cw = 0;
 		for(let i = 0; i < this.children.length; i++) {
 			cw += this.weightings[i];
-			if(this.vertical == SPLIT_HORIZ && mx <= x + cw * w
-			|| this.vertical == SPLIT_VERT && my <= y + cw * h) {
+			if(this.direction == STACK_HORIZ && mx <= x + cw * w
+			|| this.direction == STACK_VERT && my <= y + cw * h) {
 				if(this.children[i] != null) {
 					const { x: cx, y: cy, w: cw, h: ch } =
 						this.getChildArea(x, y, w, h, i);
@@ -44,7 +44,7 @@ class Split extends UiElement {
 		let currWeight = 0;
 		for(let i = 0; i < this.children.length; i++) {
 			if(this.children[i] != null) {
-				if(this.vertical == SPLIT_VERT)
+				if(this.direction == STACK_VERT)
 					f(
 						this.children[i],
 						x,
@@ -71,7 +71,7 @@ class Split extends UiElement {
 		const prevWeight = this.weightings.reduce(
 			(a, b, j) => j < i ? a + b : a,
 			0);
-		if(this.vertical == SPLIT_HORIZ)
+		if(this.direction == STACK_HORIZ)
 			return {
 				x: x + w * prevWeight / totalWeight,
 				y,
