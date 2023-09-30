@@ -1,8 +1,19 @@
-const mainGrid = new Grid(5, 5);
 let cellSize = 50;
+let config = {};
+
+const mainGrid = new Grid(5, 5);
+let structureTypes = {};
+
+function preload() {
+	preloadConfig();
+}
 
 function setup() {
 	createCanvas(500, 500);
+	structureTypes = parseStructureTypes(mainGrid);
+
+	mainGrid.placeAt(1, 1, structureTypes["OxygenProducer"]);
+	mainGrid.placeAt(1, 3, structureTypes["Generator"]);
 }
 
 function draw() {
@@ -17,7 +28,10 @@ function drawGrid(g) {
 	g.forEach((c, x, y) => {
 		stroke(200);
 		strokeWeight(1);
-		fill(200, 70);
+		if(c.available)
+			fill(200, 70);
+		else
+			fill(c.structure.colour);
 		rect(x * cellSize, y * cellSize, cellSize, cellSize, cellSize / 5);
 	});
 }

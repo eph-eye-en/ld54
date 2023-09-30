@@ -1,0 +1,10 @@
+OxygenProducer:
+  name: Oxygen Producer
+  colour: [0, 100, 255]
+  produces:
+    oxygen: 2
+  consumes:
+    electricity: 1
+Generator:
+  name: Generator
+  colour: [255, 255, 0]

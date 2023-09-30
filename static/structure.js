@@ -1,8 +1,13 @@
 class Structure {
-	constructor(grid) {
+	constructor(grid, { name, colour, produces, consumes }) {
 		this.grid = grid;
 		this.x = null;
 		this.y = null;
+
+		this.name = name;
+		this.colour = colour;
+		this.produces = produces;
+		this.consumes = consumes;
 	}
 
 	canPlaceAt(x, y) {
@@ -15,5 +20,13 @@ class Structure {
 			return false;
 		
 		this.grid.placeAt(x, y, this);
+	}
+
+	produces(r) {
+		return this.produces[r] || 0;
+	}
+
+	consumes(r) {
+		return this.consumes[r] || 0;
 	}
 }
