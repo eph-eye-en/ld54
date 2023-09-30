@@ -37,6 +37,10 @@ function draw() {
 
 function mousePressed() {
 	ui.mousePressed(mouseX, mouseY);
+
+	if(mouseX >= 0 && mouseX < width
+	&& mouseY >= 0 && mouseY < height)
+		return false;
 }
 
 function hotbarClicked(idx) {
