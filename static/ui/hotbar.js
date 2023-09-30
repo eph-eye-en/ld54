@@ -18,8 +18,8 @@ class Hotbar extends UiElement {
 		px -= x + w / 2 - numSlots / 2 * slotSize;
 		py -= y + h / 2 - slotSize / 2;
 
-		if(px < 0 || px > numSlots * slotSize
-		|| py < 0 || py > slotSize)
+		if(px < 0 || px >= numSlots * slotSize
+		|| py < 0 || py >= slotSize)
 			return null;
 
 		return Math.floor(px / slotSize);
