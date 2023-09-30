@@ -5,6 +5,8 @@ let config = {};
 const mainGrid = new Grid(5, 5);
 let structureTypes = {};
 
+let ui;
+
 function preload() {
 	preloadConfig();
 }
@@ -15,27 +17,20 @@ function setup() {
 
 	mainGrid.placeAt(1, 1, structureTypes["OxygenProducer"]);
 	mainGrid.placeAt(1, 3, structureTypes["Generator"]);
+
+	ui = new Split(SPLIT_VERT, [0.7, 0.1, 0.2]);
+	ui.children[0] = new GridDrawer(mainGrid);
+	ui.children[2] = new Hotbar(structureTypes, Object.keys(structureTypes));
 }
 
 function draw() {
-	rectMode(CENTER);
 	background(51);
 
-	translate(100, 100);
-	drawGrid(mainGrid);
+	//translate(100, 100);
+	//drawGrid(mainGrid);
+	
+	//translate(0, 300);
+	//drawHotbar(Object.values(structureTypes), hotbarSize);
 
-	translate(0, 300);
-	drawHotbar(Object.values(structureTypes), hotbarSize);
-}
-
-function drawGrid(g) {
-	g.forEach((c, x, y) => {
-		stroke(200);
-		strokeWeight(1);
-		if(c.available)
-			fill(200, 70);
-		else
-			fill(c.structure.colour);
-		rect(x * cellSize, y * cellSize, cellSize, cellSize, cellSize / 5);
-	});
+	ui.draw(30, 30, width - 60, height - 60);
 }
