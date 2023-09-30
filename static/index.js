@@ -1,4 +1,5 @@
 let cellSize = 50;
+let hotbarSize = 50;
 let config = {};
 
 const mainGrid = new Grid(5, 5);
@@ -22,6 +23,9 @@ function draw() {
 
 	translate(100, 100);
 	drawGrid(mainGrid);
+
+	translate(0, 300);
+	drawHotbar(Object.values(structureTypes), hotbarSize);
 }
 
 function drawGrid(g) {
