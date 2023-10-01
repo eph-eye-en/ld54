@@ -21,6 +21,11 @@ class UiManager {
 		this.ui.mousePressed(mx, my);
 	}
 
+	keyPressed(keyCode) {
+		if(this.ui.root == this.levelScreen && keyCode == 82)	//82 == 'R'
+			this.levelManager.rotatePressed();
+	}
+
 	createMainMenu() {
 		const stack1 = new Stack(STACK_HORIZ,[0.4,0.6]);
 		const stack2 = new Stack(STACK_VERT,[0.5,0.2,0.2,0.2,0.1]);

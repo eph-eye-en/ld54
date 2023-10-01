@@ -1,3 +1,8 @@
+const STRUCT_UP = 0;
+const STRUCT_RIGHT = 1;
+const STRUCT_DOWN = 2;
+const STRUCT_LEFT = 3;
+
 class Structure {
 	constructor(props) {
 		this.grid = null;
@@ -5,10 +10,17 @@ class Structure {
 		this.y = null;
 
 		this.props = props;
+		this.direction = STRUCT_UP;
+	}
+
+	rotateClockwise() {
+		this.direction = (this.direction + 1) % 4;
 	}
 
 	copy() {
-		return new Structure(this.props);
+		const s = new Structure(this.props);
+		s.direction = this.direction;
+		return s;
 	}
 
 	canPlaceAt(grid, x, y) {
@@ -36,13 +48,30 @@ class Structure {
 	}
 
 	forEach(f) {
-		for(let cx = 0; cx < this.shape.length; cx++) {
-			const col = this.shape[cx];
-			for(let cy = 0; cy < col.length; cy++) {
-				const cellNeeded = col[cy];
+		for(let i = 0; i < this.shape.length; i++) {
+			const col = this.shape[i];
+			for(let j = 0; j < col.length; j++) {
+				const cellNeeded = col[j];
 				if(!cellNeeded)
 					continue;
-				f(cx - this.centre.x, cy - this.centre.y);
+				const cx = i - this.centre.x;
+				const cy = j - this.centre.y;
+				switch(this.direction) {
+					case STRUCT_UP:
+						f(cx, cy);
+						break;
+					case STRUCT_RIGHT:
+						f(-cy, cx);
+						break;
+					case STRUCT_DOWN:
+						f(-cx, -cy);
+						break;
+					case STRUCT_LEFT:
+						f(cy, -cx);
+						break;
+					default:
+						throw new Error("Invalid structure direction");
+				}
 			}
 		}
 	}

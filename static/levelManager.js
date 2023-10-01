@@ -36,6 +36,10 @@ class LevelManager {
 		return false;
 	}
 
+	rotatePressed() {
+		this.gridDrawer.hoverStructure.rotateClockwise();
+	}
+
 	hotbarPressed(idx) {
 		if(mouseButton === LEFT) {
 			this.hotbar.selectIndex(idx);
