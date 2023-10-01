@@ -15,7 +15,7 @@ function preload() {
 function setup() {
 	let cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
-	structureTypes = parseStructureTypes(mainGrid);
+	structureTypes = parseStructureTypes();
 
 	let stack = new Stack(STACK_VERT, [0.7, 0.1, 0.2]);
 
@@ -53,7 +53,7 @@ function hotbarPressed(idx) {
 
 function gridCellPressed(cx, cy) {
 	if(mouseButton === LEFT)
-		getSelectedStructure().copy().placeAt(cx, cy);
+		getSelectedStructure().copy().placeAt(mainGrid, cx, cy);
 	else if(mouseButton === RIGHT)
 		mainGrid.removeAt(cx, cy);
 }

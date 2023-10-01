@@ -52,7 +52,7 @@ class GridDrawer extends UiElement {
 		const hov = this.getHoveredCell(x, y, w, h, mx, my);
 		if(hov != null) {
 			strokeWeight(3);
-			if(this.hoverStructure.canPlaceAt(hov.x, hov.y)) {
+			if(this.hoverStructure.canPlaceAt(this.grid, hov.x, hov.y)) {
 				stroke(255);
 				fill(this.hoverStructure.colour, 80);
 			}

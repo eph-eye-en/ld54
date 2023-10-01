@@ -1,43 +1,32 @@
 class Structure {
-	constructor(grid, { name, colour, shape, centre, produces, consumes }) {
-		this.grid = grid;
+	constructor(props) {
+		this.grid = null;
 		this.x = null;
 		this.y = null;
 
-		this.name = name;
-		this.colour = colour;
-		this.shape = shape;
-		this.centre = centre;
-		this.produces = produces;
-		this.consumes = consumes;
+		this.props = props;
 	}
 
 	copy() {
-		return new Structure(this.grid, {
-			name: this.name,
-			colour: this.colour,
-			shape: this.shape,
-			centre: this.centre,
-			produces: this.produces,
-			consumes: this.consumes,
-		});
+		return new Structure(this.props);
 	}
 
-	canPlaceAt(x, y) {
+	canPlaceAt(grid, x, y) {
 		let canPlace = true;
 		this.forEach((cx, cy) => {
-			const c = this.grid.getCell(x + cx, y + cy);
+			const c = grid.getCell(x + cx, y + cy);
 			if(!c.valid || !c.available)
 				canPlace = false;
 		})
 		return canPlace;
 	}
 
-	placeAt(x, y) {
-		if(!this.canPlaceAt(x, y))
+	placeAt(grid, x, y) {
+		if(!this.canPlaceAt(grid, x, y))
 			return false;
 		
-		this.forEach((cx, cy) => this.grid.fillCell(x + cx, y + cy, this));
+		this.forEach((cx, cy) => grid.fillCell(x + cx, y + cy, this));
+		this.grid =  grid;
 		this.x = x;
 		this.y = y;
 		return true;
@@ -45,6 +34,9 @@ class Structure {
 
 	remove() {
 		this.forEach((cx, cy) => this.grid.emptyCell(this.x + cx, this.y + cy));
+		this.grid = null;
+		this.x = null;
+		this.y = null;
 	}
 
 	produces(r) {
@@ -65,5 +57,29 @@ class Structure {
 				f(cx - this.centre.x, cy - this.centre.y);
 			}
 		}
+	}
+
+	get name() {
+		return this.props.name;
+	}
+
+	get colour() {
+		return this.props.colour;
+	}
+
+	get shape() {
+		return this.props.shape;
+	}
+
+	get centre() {
+		return this.props.centre;
+	}
+
+	get produces() {
+		return this.props.produces;
+	}
+
+	get consumes() {
+		return this.props.consumes;
 	}
 }

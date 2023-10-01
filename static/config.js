@@ -4,7 +4,7 @@ function preloadConfig() {
 	configStrings.structures = loadStrings("config/structures.yaml");
 }
 
-function parseStructureTypes(grid) {
+function parseStructureTypes() {
 	const types = {};
 	config.structures = jsyaml.load(configStrings.structures.join("\n"));
 	for(let s in config.structures) {
@@ -13,7 +13,7 @@ function parseStructureTypes(grid) {
 			parseStructureShape(str.shape);
 		str.shape = shape;
 		str.centre = centre;
-		types[s] = new Structure(grid, str);
+		types[s] = new Structure(str);
 	}
 	return types;
 }
