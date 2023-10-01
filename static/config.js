@@ -17,6 +17,7 @@ function parseStructureTypes() {
 	const structures = jsyaml.load(configStrings.structures.join("\n"));
 	for(let s in structures) {
 		const str = structures[s];
+		str.slug = s;
 		const { shape, centre } =
 			parseShape(str.shape);
 		str.shape = shape;
@@ -37,6 +38,7 @@ function parseLevels() {
 		const l = conf[i];
 		levels.push({
 			name: l.name,
+			index: i,
 			shape: parseShape(l.shape).shape,
 			structures: l.structures,
 			constraints: parseGridConstraints(l.constraints),
@@ -50,7 +52,7 @@ function parseGridConstraints({ resources = {}, structures = {} }) {
 		resources: Object.entries(resources)
 			.map(([r, m]) => ({ res: r, min: m })),
 		structures: Object.entries(structures)
-			.map(([s, m]) => ({ struct: s, min: m })),
+			.map(([s, m]) => ({ slug: s, min: m })),
 	};
 }
 

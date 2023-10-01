@@ -1,8 +1,9 @@
 class GridConstraintDrawer extends UiElement {
-	constructor(fontSize) {
+	constructor(fontSize, structureTypes) {
 		super();
 
 		this.fontSize = fontSize;
+		this.structureTypes = structureTypes;
 
 		this.grid = null;
 		this.constraints = null;
@@ -56,12 +57,13 @@ class GridConstraintDrawer extends UiElement {
 		}
 		for(let sc of this.constraints.structures) {
 			const count = GridConstraints.getStructureCount(
-				this.grid, sc.struct.name);
+				this.grid, sc.slug);
 			if(count >= sc.min)
 				fill(150, 200, 150);
 			else
 				fill(250, 150, 150);
-			text(`${sc.struct.name}: ${count} / ${sc.min}`, 0, 0);
+			const { name } = this.structureTypes[sc.slug];
+			text(`${name}: ${count} / ${sc.min}`, 0, 0);
 
 			translate(0, lh);
 		}
