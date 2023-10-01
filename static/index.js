@@ -1,6 +1,6 @@
-const mainGrid = new Grid(5, 5);
-let structureTypes = {};
-let hotbarItems = ["OxygenProducer", "Generator"];
+let mainGrid;
+let structureTypes, levels;
+let hotbarItems = ["OxygenProducer", "Generator", "Plants"];
 let gridConstraints;
 
 let ui, constraintDrawer, gridDrawer, hotbar;
@@ -13,16 +13,10 @@ function setup() {
 	let cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
 
-	structureTypes = parseStructureTypes();
-	gridConstraints = {
-	resources: [
-		{ res: "Oxygen", min: 4 },
-		{ res: "Electricity", min: 0 },
-	],
-	structures: [
-		{ struct: structureTypes["OxygenProducer"], min: 1 },
-	],
-};
+	({ structureTypes, levels } = parseConfig());
+
+	mainGrid = new Grid(levels[0].shape);
+	gridConstraints = levels[0].constraints;
 
 	const stack1 = new Stack(STACK_HORIZ, [0.3, 0.7]);
 

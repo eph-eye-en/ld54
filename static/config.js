@@ -2,6 +2,14 @@ let configStrings = {};
 
 function preloadConfig() {
 	configStrings.structures = loadStrings("config/structures.yaml");
+	configStrings.levels = loadStrings("config/levels.yaml");
+}
+
+function parseConfig() {
+	return {
+		structureTypes: parseStructureTypes(),
+		levels: parseLevels(),
+	};
 }
 
 function parseStructureTypes() {
@@ -10,7 +18,7 @@ function parseStructureTypes() {
 	for(let s in structures) {
 		const str = structures[s];
 		const { shape, centre } =
-			parseStructureShape(str.shape);
+			parseShape(str.shape);
 		str.shape = shape;
 		str.centre = centre;
 		if(!str.produces)
@@ -22,7 +30,30 @@ function parseStructureTypes() {
 	return types;
 }
 
-function parseStructureShape(shape) {
+function parseLevels() {
+	const levels = [];
+	const conf = jsyaml.load(configStrings.levels.join("\n"));
+	for(let i in conf) {
+		const l = conf[i];
+		levels.push({
+			name: l.name,
+			shape: parseShape(l.shape).shape,
+			constraints: parseGridConstraints(l.constraints),
+		});
+	}
+	return levels;
+}
+
+function parseGridConstraints({ resources = {}, structures = {} }) {
+	return {
+		resources: Object.entries(resources)
+			.map(([r, m]) => ({ res: r, min: m })),
+		structures: Object.entries(structures)
+			.map(([s, m]) => ({ struct: s, min: m })),
+	};
+}
+
+function parseShape(shape) {
 	let cells = [];
 	const lines = shape.toUpperCase().split("\n");
 	let y = 0;

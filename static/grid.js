@@ -1,17 +1,20 @@
 class Grid {
-	constructor(width, height) {
-		this.width = width;
-		this.height = height;
+	constructor(shape) {
+		this.width = shape.length;
+		this.height = shape[0].length;
 
 		this.cells = [];
-		for(let x = 0; x < this.width; x++) {
+		for(let row of shape) {
 			const arr = [];
-			for(let y = 0; y < this.height; y++)
-				arr.push({
-					valid: true,
-					available: true,
-					structure: null,
-				});
+			for(let cell of row)
+				if(cell)
+					arr.push({
+						valid: true,
+						available: true,
+						structure: null,
+					});
+				else
+					arr.push({ valid: false });
 			this.cells.push(arr);
 		}
 

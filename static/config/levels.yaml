@@ -1,0 +1,30 @@
+- name: "Introduction"
+  shape: |
+    XX-
+    XXX
+    XXX
+  constraints:
+    resources:
+      Oxygen: 2
+      Electricity: 0
+
+- name: "Tessellate"
+  shape: |
+    XXXX-
+    XXXXX
+    XXXXX
+    XXXXX
+    XXXXX
+  constraints:
+    structures:
+    - OxygenProducer: 2
+    - Generator: 4
+
+- name: "Green"
+  shape: |
+    XXXXXXXXXXXXXXX
+    -X--X--X--X--X-
+    -X--X--X--X--X-
+  constraints:
+    resources:
+      Oxygen: 5

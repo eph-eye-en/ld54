@@ -17,3 +17,12 @@ Generator:
     XX
   produces:
     Electricity: 2
+Plants:
+  name: Plants
+  colour: [50, 255, 50]
+  shape: |
+    XX
+    -O
+    -X
+  produces:
+    Oxygen: 1
