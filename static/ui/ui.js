@@ -23,3 +23,7 @@ function getLocalCoords(x0, y0) {
 		.transformPoint(new DOMPoint(x0 * pd, y0 * pd));
 	return { x, y };
 }
+
+function bindTo(f, thisArg) {
+	return (...args) => f.bind(thisArg)(...args);
+}

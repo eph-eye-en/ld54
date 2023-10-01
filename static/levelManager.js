@@ -62,7 +62,3 @@ class LevelManager {
 		return this.structureTypes[l.structures[this.hotbar.selectedIdx]];
 	}
 }
-
-function bindTo(f, thisArg) {
-	return (...args) => f.bind(thisArg)(...args);
-}
