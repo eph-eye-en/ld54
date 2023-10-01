@@ -6,9 +6,9 @@ function preloadConfig() {
 
 function parseStructureTypes() {
 	const types = {};
-	config.structures = jsyaml.load(configStrings.structures.join("\n"));
-	for(let s in config.structures) {
-		const str = config.structures[s];
+	const structures = jsyaml.load(configStrings.structures.join("\n"));
+	for(let s in structures) {
+		const str = structures[s];
 		const { shape, centre } =
 			parseStructureShape(str.shape);
 		str.shape = shape;

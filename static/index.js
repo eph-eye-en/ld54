@@ -1,7 +1,3 @@
-let cellSize = 50;
-let hotbarSize = 50;
-let config = {};
-
 const mainGrid = new Grid(5, 5);
 let structureTypes = {};
 let hotbarItems = ["OxygenProducer", "Generator"];
