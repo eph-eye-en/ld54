@@ -1,8 +1,4 @@
-let mainGrid;
 let structureTypes, levels;
-let hotbarItems = ["OxygenProducer", "Generator", "Plants"];
-let gridConstraints;
-
 let ui, levelManager;
 
 function preload() {

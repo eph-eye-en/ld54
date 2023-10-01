@@ -23,8 +23,8 @@
   - Generator
   constraints:
     structures:
-    - OxygenProducer: 2
-    - Generator: 4
+      OxygenProducer: 2
+      Generator: 4
 
 - name: "Green"
   shape: |

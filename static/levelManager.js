@@ -6,7 +6,7 @@ class LevelManager {
 		this.gridDrawer = new GridDrawer();
 		this.hotbar = new Hotbar(structureTypes);
 		this.hotbar.onMousePressed = bindTo(this.hotbarPressed, this);
-		this.constraintDrawer = new GridConstraintDrawer(30);
+		this.constraintDrawer = new GridConstraintDrawer(30, structureTypes);
 		this.gridDrawer.onMousePressed = bindTo(this.gridCellPressed, this);
 
 		this.grid = null;

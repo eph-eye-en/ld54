@@ -4,7 +4,7 @@ class GridConstraints {
 			if(!this.hasNetResourceMinimum(grid, r.res, r.min))
 				return false;
 		for(let s of constraints.structures)
-			if(!this.structureIsPresent(grid, s.struct, s.min))
+			if(!this.structureIsPresent(grid, s.slug, s.min))
 				return false;
 		return true;
 	}
@@ -22,15 +22,15 @@ class GridConstraints {
 		return this.getNetResource(grid, resource) >= min;
 	}
 
-	static getStructureCount(grid, structName) {
+	static getStructureCount(grid, structSlug) {
 		let count = 0;
 		for(let s of grid.structures)
-			if(s.name == structName)
+			if(s.slug == structSlug)
 				count++;
 		return count;
 	}
 	
-	static structureIsPresent(grid, structName, min) {
-		return this.getStructureCount(grid, structName) >= min;
+	static structureIsPresent(grid, structSlug, min) {
+		return this.getStructureCount(grid, structSlug) >= min;
 	}
 }

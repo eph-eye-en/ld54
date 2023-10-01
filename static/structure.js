@@ -51,6 +51,10 @@ class Structure {
 		return this.props.name;
 	}
 
+	get slug() {
+		return this.props.slug;
+	}
+
 	get colour() {
 		return this.props.colour;
 	}
