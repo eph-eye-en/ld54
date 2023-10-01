@@ -22,11 +22,20 @@ class UiManager {
 	}
 
 	createMainMenu() {
-		return new Button("Play", this.loadLevelsMenu.bind(this),
-			[100, 100, 255],[50,50,255]);
+		const stack1 = new Stack(STACK_HORIZ,[0.4,0.6]);
+		const stack2 = new Stack(STACK_VERT,[0.5,0.2,0.2,0.2,0.1]);
+		const stack3 = new Stack(STACK_VERT,[0.1,0.3,0.6]);
+		stack1.children[0] = stack2;
+		stack1.children[1] = stack3;
+		stack2.children[1] = new Button("Play", this.loadLevelsMenu.bind(this), [20,20,200,0],[100,100,200]);
+		stack2.children[2] = new Button("Level 1", ()=>this.loadLevel(0), [20,20,200,0],[100,100,200]);
+		stack2.children[3] = new Button("Level 2", ()=>this.loadLevel(1), [20,20,200,0],[100,100,200]);
+		stack3.children[1] = new Button("Space Ltd", ()=>this.loadLevel(2), [20,20,200,0],[100,100,200]);
+		return stack1;
 	}
 
 	createLevelsMenu() {
+		
 		const stack = new Stack(STACK_VERT, [1, 0.1, 1, 0.1, 1]);
 		for(let i = 0; i < 3; i++)
 			stack.children[i * 2] = new Button(

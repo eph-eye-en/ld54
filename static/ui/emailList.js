@@ -4,6 +4,7 @@ class EmailList extends UiElement {
 
         this.levelAmount = levelAmount;
         this.levelNumber = levelNumber;
+        this.selectedIdx = 0;
 	}
 
 	getEmailHeight(w, h) {
@@ -30,26 +31,24 @@ class EmailList extends UiElement {
 		push();
 		rectMode(CENTER);
 		translate(x, y);
-		translate(w / 2 - (numSlots - 1) / 2 * emailHeight, h / 2);
-	
-		for(let i = 0; i < numSlots; i++) {
-			const s = this.types[this.items[i]];
-			fill(200, 50);
-			stroke(100, 100, 200);
-			strokeWeight(3);
-			square(i * emailHeight, 0, emailHeight, 8);
-	
-			fill(s.colour);
-			stroke(200);
-			strokeWeight(1);
-			square(i * emailHeight, 0, emailHeight * 0.8, emailHeight * 0.8 / 5);
-		}
+		translate(w / 2, h / 2);
 	
 		const hovIdx = this.getHoveredIndex(x, y, w, h, mx, my);
+		for(let i = 0; i < this.levelNumber; i++) {
+            if (i==hovIdx)
+                fill(230,230,255)
+            else
+			    fill(220);
+			stroke(150);
+			strokeWeight(3);
+			rect(0, i * emailHeight, w, emailHeight, 8);
+            
+		}
+	
 		noFill();
 		strokeWeight(5);
 		stroke(150, 250, 150);
-		square(emailHeight * this.selectedIdx, 0, emailHeight);
+		rect(0, emailHeight * this.selectedIdx, w, emailHeight);
 		if(hovIdx != null) {
 			stroke(150, 150, 250);
 			square(emailHeight * hovIdx, 0, emailHeight);

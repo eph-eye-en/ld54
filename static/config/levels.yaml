@@ -29,7 +29,7 @@
 - name: "Green"
   shape: |
     XXXXXXXXXXX
-    -X-X-X-X-X-
+    XXXXXXXXXXX
     -X-X-X-X-X-
   structures:
   - OxygenProducer
