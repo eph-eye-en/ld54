@@ -25,7 +25,7 @@ class Grid {
 		return this.cells[x][y];
 	}
 
-	placeAt(x, y, structure) {
+	fillCell(x, y, structure) {
 		const c = this.getCell(x, y);
 		if(!c.valid || !c.available)
 			return false;

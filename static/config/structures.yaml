@@ -1,6 +1,10 @@
 OxygenProducer:
   name: Oxygen Producer
   colour: [0, 100, 255]
+  shape: |
+    XX
+    O-
+    X-
   produces:
     oxygen: 2
   consumes:
@@ -8,3 +12,6 @@ OxygenProducer:
 Generator:
   name: Generator
   colour: [255, 255, 0]
+  shape: |
+    XX
+    XX

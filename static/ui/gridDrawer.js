@@ -60,9 +60,12 @@ class GridDrawer extends UiElement {
 				stroke(255, 20, 20);
 				fill(200, 70, 70);
 			}
-			rect(hov.x * cellSize, hov.y * cellSize,
-				cellSize, cellSize,
-				cellSize / 5);
+			this.hoverStructure.forEach((cx, cy) => {
+				if(g.getCell(hov.x + cx, hov.y + cy).valid)
+					rect((hov.x + cx) * cellSize, (hov.y + cy) * cellSize,
+						cellSize, cellSize,
+						cellSize / 5);
+			});
 		}
 
 		pop();
