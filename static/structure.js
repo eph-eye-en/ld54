@@ -10,6 +10,15 @@ class Structure {
 		this.consumes = consumes;
 	}
 
+	copy() {
+		return new Structure(this.grid, {
+			name: this.name,
+			colour: this.colour,
+			produces: this.produces,
+			consumes: this.consumes,
+		});
+	}
+
 	canPlaceAt(x, y) {
 		const c = this.grid.getCell(x, y);
 		return c.valid && c.available;
@@ -19,7 +28,16 @@ class Structure {
 		if(!this.canPlaceAt(x, y))
 			return false;
 		
-		this.grid.placeAt(x, y, this);
+		const succ = this.grid.placeAt(x, y, this);
+		if(succ) {
+			this.x = x;
+			this.y = y;
+		}
+		return succ;
+	}
+
+	remove() {
+		return this.grid.emptyCell(this.x, this.y);
 	}
 
 	produces(r) {

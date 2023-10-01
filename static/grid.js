@@ -35,6 +35,21 @@ class Grid {
 		return true;
 	}
 
+	removeAt(x, y) {
+		const c = this.getCell(x, y);
+		if(c.valid && !c.available)
+			c.structure.remove();
+	}
+
+	emptyCell(x, y) {
+		const c = this.getCell(x, y);
+		if(c.valid && !c.available) {
+			c.available = true;
+			return true;
+		}
+		return false;
+	}
+
 	forEach(f) {
 		for(let x = 0; x < this.width; x++)
 			for(let y = 0; y < this.height; y++) {

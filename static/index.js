@@ -13,7 +13,8 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(500, 500);
+	let cnv = createCanvas(500, 500);
+	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
 	structureTypes = parseStructureTypes(mainGrid);
 
 	let stack = new Stack(STACK_VERT, [0.7, 0.1, 0.2]);
@@ -44,11 +45,15 @@ function mousePressed(event) {
 }
 
 function hotbarPressed(idx) {
-	hotbar.selectedIdx = idx;
+	if(mouseButton === LEFT)
+		hotbar.selectedIdx = idx;
 }
 
 function gridCellPressed(cx, cy) {
-	mainGrid.placeAt(cx, cy, getSelectedStructure());
+	if(mouseButton === LEFT)
+		getSelectedStructure().copy().placeAt(cx, cy);
+	else if(mouseButton === RIGHT)
+		mainGrid.removeAt(cx, cy);
 }
 
 function getSelectedStructure() {
