@@ -51,10 +51,7 @@ class Button extends UiElement {
 	}
 
 	mousePressed(x, y, w, h, mx, my) {
-		console.log("Is clicked");
-		if(this.isHovered){
-			console.log("Is Hovering and clicked");
+		if(this.isHovered)
 			this.clickedEvent();
-		}
 	}
 }
