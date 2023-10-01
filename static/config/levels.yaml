@@ -28,9 +28,9 @@
 
 - name: "Green"
   shape: |
-    XXXXXXXXXXXXXXX
-    -X--X--X--X--X-
-    -X--X--X--X--X-
+    XXXXXXXXXXX
+    -X-X-X-X-X-
+    -X-X-X-X-X-
   structures:
   - OxygenProducer
   - Generator
@@ -38,3 +38,4 @@
   constraints:
     resources:
       Oxygen: 5
+      Electricity: 0
