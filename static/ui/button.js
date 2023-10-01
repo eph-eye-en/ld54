@@ -9,6 +9,7 @@ class Button extends UiElement {
         this.isHovered = false;
 
 		this.outlineColour = [100, 100, 200];
+		this.fontSize = 30;
 	}
 
 	isHovering(x, y, w, h, px, py) {
@@ -47,7 +48,7 @@ class Button extends UiElement {
 			// rect(0, 0, w, h);
 		// }
 
-		textSize(30);
+		textSize(this.fontSize);
 		textAlign(CENTER, CENTER);
 		fill(255);
 		noStroke();

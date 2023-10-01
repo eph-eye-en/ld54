@@ -1,28 +1,28 @@
 class EmailList extends UiElement {
-	constructor(levelAmount,levelNumber) {
+	constructor(levelNumber) {
 		super();
 
-        this.levelAmount = levelAmount;
         this.levelNumber = levelNumber;
         this.selectedIdx = 0;
 	}
 
 	getEmailHeight(w, h) {
-		return Math.floor(h / (this.items.length+1));
+        return 300;
+		return Math.floor(h / (this.levelNumber+1));
 	}
 
-	// getHoveredIndex(x, y, w, h, px, py) {
-	// 	const EmailHeight = this.getEmailHeight(w, h);
+	getHoveredIndex(x, y, w, h, px, py) {
+		const EmailHeight = this.getEmailHeight(w, h);
 
-	// 	px -= x + w / 2 - numSlots / 2 * EmailHeight;
-	// 	py -= y + h / 2 - EmailHeight / 2;
+        px -= x;
+        py -= y;
 
-	// 	if(px < 0 || px >= numSlots * EmailHeight
-	// 	|| py < 0 || py >= EmailHeight)
-	// 		return null;
+		if(px < 0 || px >= w
+		|| py < 0 || py >= this.levelNumber*EmailHeight)
+			return null;
 
-	// 	return Math.floor(px / EmailHeight);
-	// }
+		return Math.floor(py / EmailHeight);
+	}
 
 	draw(x, y, w, h) {
 		const emailHeight = this.getEmailHeight(w, h);
@@ -31,7 +31,7 @@ class EmailList extends UiElement {
 		push();
 		rectMode(CENTER);
 		translate(x, y);
-		translate(w / 2, h / 2);
+		translate(w/2, emailHeight/2);
 	
 		const hovIdx = this.getHoveredIndex(x, y, w, h, mx, my);
 		for(let i = 0; i < this.levelNumber; i++) {
@@ -51,7 +51,7 @@ class EmailList extends UiElement {
 		rect(0, emailHeight * this.selectedIdx, w, emailHeight);
 		if(hovIdx != null) {
 			stroke(150, 150, 250);
-			square(emailHeight * hovIdx, 0, emailHeight);
+			rect(0, emailHeight * hovIdx, w, emailHeight);
 		}
 
 		pop();
