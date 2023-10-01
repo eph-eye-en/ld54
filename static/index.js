@@ -1,19 +1,17 @@
 const margin = 30;
 
-let structureTypes, levels;
-let levelManager, uiManager;
+let uiManager;
 
 function preload() {
 	preloadConfig();
 }
 
 function setup() {
-	let cnv = createCanvas(innerWidth, innerHeight);
+	const cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
 
-	({ structureTypes, levels } = parseConfig());
-	levelManager = new LevelManager(structureTypes, levels);
-	const lm = levelManager;
+	const { structureTypes, levels } = parseConfig();
+	const levelManager = new LevelManager(structureTypes, levels);
 	uiManager = new UiManager(
 		margin, margin, width - margin * 2, height - margin * 2,
 		levelManager);
