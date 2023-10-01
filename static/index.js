@@ -30,3 +30,7 @@ function mousePressed(event) {
 	&& mouseY >= 0 && mouseY < height)
 		return false;
 }
+
+function keyPressed() {
+	uiManager.keyPressed(keyCode);
+}
