@@ -1,9 +1,9 @@
 class GridDrawer extends UiElement {
-	constructor(grid, hoverStructure) {
+	constructor() {
 		super();
 
-		this.grid = grid;
-		this.hoverStructure = hoverStructure;
+		this.grid = null;
+		this.hoverStructure = null;
 	}
 
 	getCellSize(w, h) {

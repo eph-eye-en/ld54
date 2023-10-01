@@ -1,10 +1,11 @@
 class Hotbar extends UiElement {
-	constructor(structureTypes, items, selectedIdx) {
+	constructor(structureTypes) {
 		super();
 
 		this.types = structureTypes;
-		this.items = items;
-		this.selectedIdx = selectedIdx || 0;
+
+		this.items = null;
+		this.selectedIdx =  0;
 	}
 
 	getSlotSize(w, h) {

@@ -1,10 +1,11 @@
 class GridConstraintDrawer extends UiElement {
-	constructor(grid, constraints, fontSize) {
+	constructor(fontSize) {
 		super();
 
-		this.grid = grid;
-		this.constraints = constraints;
 		this.fontSize = fontSize;
+
+		this.grid = null;
+		this.constraints = null;
 	}
 
 	get lineHeight() {

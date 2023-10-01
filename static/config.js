@@ -38,6 +38,7 @@ function parseLevels() {
 		levels.push({
 			name: l.name,
 			shape: parseShape(l.shape).shape,
+			structures: l.structures,
 			constraints: parseGridConstraints(l.constraints),
 		});
 	}

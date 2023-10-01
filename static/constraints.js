@@ -1,4 +1,14 @@
 class GridConstraints {
+	static satisfies(grid, constraints) {
+		for(let r of constraints.resources)
+			if(!this.hasNetResourceMinimum(grid, r.res, r.min))
+				return false;
+		for(let s of constraints.structures)
+			if(!this.structureIsPresent(grid, s.struct, s.min))
+				return false;
+		return true;
+	}
+
 	static getNetResource(grid, resource) {
 		let net = 0;
 		for(let s of grid.structures) {
