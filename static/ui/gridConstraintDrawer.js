@@ -23,17 +23,18 @@ class GridConstraintDrawer extends UiElement {
 		fill(50, 50, 250);
 		stroke(50, 50, 250);
 		strokeWeight(3);
-		rect(0, 0, w, lh);
+		rect(0, 0, w, lh, 8, 8, 0, 0);
 
 		fill(50, 50, 250, 30);
 		stroke(50, 50, 250);
 		strokeWeight(3);
-		rect(0, lh, w, numLines * lh);
+		rect(0, lh, w, numLines * lh, 0, 0, 8, 8);
 
 		translate(this.fontSize / 3, lh / 2);
 
 		textSize(this.fontSize);
 		textAlign(LEFT, CENTER);
+		textStyle(ITALIC);
 		fill(255);
 		noStroke();
 		text("Requirements", 0, 0);
@@ -41,6 +42,7 @@ class GridConstraintDrawer extends UiElement {
 		translate(0, lh)
 
 		noStroke();
+		textStyle(NORMAL);
 		for(let rc of this.constraints.resources) {
 			const net = GridConstraints.getNetResource(this.grid, rc.res);
 			if(net >= rc.min)

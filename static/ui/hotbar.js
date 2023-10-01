@@ -40,7 +40,7 @@ class Hotbar extends UiElement {
 			fill(200, 50);
 			stroke(100, 100, 200);
 			strokeWeight(3);
-			square(i * slotSize, 0, slotSize);
+			square(i * slotSize, 0, slotSize, 8);
 	
 			fill(s.colour);
 			stroke(200);

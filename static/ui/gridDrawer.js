@@ -30,6 +30,7 @@ class GridDrawer extends UiElement {
 	draw(x, y, w, h) {
 		const g = this.grid;
 		const cellSize = this.getCellSize(w, h);
+		const cornerRadius = cellSize / 7;
 		let { x: mx, y: my } = getLocalCoords(mouseX, mouseY);
 
 		push();
@@ -46,7 +47,7 @@ class GridDrawer extends UiElement {
 				fill(c.structure.colour);
 			rect(cx * cellSize, cy * cellSize,
 				cellSize, cellSize,
-				cellSize / 5);
+				cellSize / 8);
 		});
 
 		const hov = this.getHoveredCell(x, y, w, h, mx, my);
@@ -54,17 +55,17 @@ class GridDrawer extends UiElement {
 			strokeWeight(3);
 			if(this.hoverStructure.canPlaceAt(this.grid, hov.x, hov.y)) {
 				stroke(255);
-				fill(this.hoverStructure.colour, 80);
+				fill(...this.hoverStructure.colour, 90);
 			}
 			else {
 				stroke(255, 20, 20);
-				fill(200, 70, 70);
+				fill(200, 70, 70, 70);
 			}
 			this.hoverStructure.forEach((cx, cy) => {
 				if(g.getCell(hov.x + cx, hov.y + cy).valid)
 					rect((hov.x + cx) * cellSize, (hov.y + cy) * cellSize,
 						cellSize, cellSize,
-						cellSize / 5);
+						cornerRadius);
 			});
 		}
 
