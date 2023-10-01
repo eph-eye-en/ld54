@@ -23,7 +23,7 @@ class UiManager {
 
 	createMainMenu() {
 		return new Button("Play", this.loadLevelsMenu.bind(this),
-			[100, 100, 255]);
+			[100, 100, 255],[50,50,255]);
 	}
 
 	createLevelsMenu() {
@@ -32,7 +32,7 @@ class UiManager {
 			stack.children[i * 2] = new Button(
 				`Level ${i + 1}`,
 				() => this.loadLevel(i),
-				[100, 100, 255]);
+				[100, 100, 255],[50,50,255]);
 		return this.wrapWithCloseButton(stack, this.loadMainMenu.bind(this));
 	}
 
@@ -49,7 +49,7 @@ class UiManager {
 	wrapWithCloseButton(child, onClose) {
 		const stack = new Stack(STACK_VERT, [0.05, 0.95]);
 		stack.children[0] = new Square(RIGHT, TOP,
-			new Button("X", onClose, [120, 50, 50]));
+			new Button("X", onClose, [120, 50, 50],[200,50,50]));
 		stack.children[1] = child;
 		return stack;
 	}

@@ -1,10 +1,11 @@
 class Button extends UiElement {
-	constructor(buttonText, clickedEvent, buttonColour) {
+	constructor(buttonText, clickedEvent, buttonColour, hoverColour) {
 		super();
 
         this.buttonText = buttonText;
 		this.clickedEvent = clickedEvent;
         this.buttonColour = buttonColour;
+		this.hoverColour = hoverColour;
         this.isHovered = false;
 	}
 
@@ -24,21 +25,25 @@ class Button extends UiElement {
 		translate(x, y);
 		translate(w / 2, h / 2);
 
+		this.isHovered = this.isHovering(x, y, w, h, mx, my);
 
-        fill(this.buttonColour);
+		if  (this.isHovered)
+			fill(this.hoverColour);
+		else
+        	fill(this.buttonColour);
+		
         stroke(100, 100, 200);
         strokeWeight(3);
         rect(0, 0, w, h, 8);
     
 
-		this.isHovered = this.isHovering(x, y, w, h, mx, my);
-		if  (this.isHovered)
-		{
-			noFill();
-			strokeWeight(5);
-			stroke(150, 150, 250);
-			rect(0, 0, w, h);
-		}
+		// if  (this.isHovered)
+		// {
+			// noFill();
+			// strokeWeight(5);
+			// stroke(150, 150, 250);
+			// rect(0, 0, w, h);
+		// }
 
 		textSize(30);
 		textAlign(CENTER, CENTER);
