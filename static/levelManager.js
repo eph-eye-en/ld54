@@ -22,7 +22,7 @@ class LevelManager {
 		this.gridDrawer.hoverStructure = this.structureTypes[l.structures[0]];
 
 		this.hotbar.items = l.structures;
-		this.hotbar.selectedIndex = 0;
+		this.hotbar.selectIndex(0);
 
 		this.constraintDrawer.grid = this.grid;
 		this.constraintDrawer.constraints = l.constraints;
@@ -38,7 +38,7 @@ class LevelManager {
 
 	hotbarPressed(idx) {
 		if(mouseButton === LEFT) {
-			this.hotbar.selectedIdx = idx;
+			this.hotbar.selectIndex(idx);
 			this.gridDrawer.hoverStructure = this.getSelectedStructure();
 		}
 	}

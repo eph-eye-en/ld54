@@ -8,6 +8,10 @@ class Hotbar extends UiElement {
 		this.selectedIdx =  0;
 	}
 
+	selectIndex(idx) {
+		this.selectedIdx = idx;
+	}
+
 	getSlotSize(w, h) {
 		return Math.min(w / this.items.length, h);
 	}

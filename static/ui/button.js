@@ -7,6 +7,8 @@ class Button extends UiElement {
         this.buttonColour = buttonColour;
 		this.hoverColour = hoverColour;
         this.isHovered = false;
+
+		this.outlineColour = [100, 100, 200];
 	}
 
 	isHovering(x, y, w, h, px, py) {
@@ -32,7 +34,7 @@ class Button extends UiElement {
 		else
         	fill(this.buttonColour);
 		
-        stroke(100, 100, 200);
+        stroke(this.outlineColour);
         strokeWeight(3);
         rect(0, 0, w, h, 8);
     
