@@ -13,7 +13,7 @@ function preload() {
 }
 
 function setup() {
-	let cnv = createCanvas(500, 500);
+	let cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
 	structureTypes = parseStructureTypes(mainGrid);
 
