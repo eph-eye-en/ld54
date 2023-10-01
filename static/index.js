@@ -45,8 +45,10 @@ function mousePressed(event) {
 }
 
 function hotbarPressed(idx) {
-	if(mouseButton === LEFT)
+	if(mouseButton === LEFT) {
 		hotbar.selectedIdx = idx;
+		gridDrawer.hoverStructure = getSelectedStructure();
+	}
 }
 
 function gridCellPressed(cx, cy) {
