@@ -27,8 +27,8 @@ class Stack extends UiElement {
 		let cw = 0;
 		for(let i = 0; i < this.children.length; i++) {
 			cw += this.weightings[i];
-			if(this.direction == STACK_HORIZ && mx <= x + cw * w
-			|| this.direction == STACK_VERT && my <= y + cw * h) {
+			if(this.direction == STACK_HORIZ && mx <= x + cw/tw * w
+			|| this.direction == STACK_VERT && my <= y + cw/tw * h) {
 				if(this.children[i] != null) {
 					const { x: cx, y: cy, w: cw, h: ch } =
 						this.getChildArea(x, y, w, h, i);
