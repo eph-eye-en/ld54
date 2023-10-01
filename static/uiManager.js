@@ -33,7 +33,7 @@ class UiManager {
 				`Level ${i + 1}`,
 				() => this.loadLevel(i),
 				[100, 100, 255]);
-		return stack;
+		return this.wrapWithCloseButton(stack, this.loadMainMenu.bind(this));
 	}
 
 	createLevelScreen() {
@@ -43,7 +43,19 @@ class UiManager {
 		stack1.children[1] = stack2;
 		stack2.children[0] = this.levelManager.gridDrawer;
 		stack2.children[2] = this.levelManager.hotbar;
-		return stack1;
+		return this.wrapWithCloseButton(stack1, this.loadLevelsMenu.bind(this));
+	}
+
+	wrapWithCloseButton(child, onClose) {
+		const stack = new Stack(STACK_VERT, [0.05, 0.95]);
+		stack.children[0] = new Square(RIGHT, TOP,
+			new Button("X", onClose, [120, 50, 50]));
+		stack.children[1] = child;
+		return stack;
+	}
+
+	loadMainMenu() {
+		this.ui.root = this.mainMenu;
 	}
 
 	loadLevelsMenu() {
