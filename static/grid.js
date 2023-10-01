@@ -14,6 +14,8 @@ class Grid {
 				});
 			this.cells.push(arr);
 		}
+
+		this.structures = new Set();
 	}
 	
 	getCell(x, y) {
@@ -23,6 +25,15 @@ class Grid {
 				valid: false,
 			};
 		return this.cells[x][y];
+	}
+
+	placeAt(x, y, structure) {
+		if(!structure.canPlaceAt(this, x, y))
+			return false;
+		
+		structure.fillCells(this, x, y);
+		this.structures.add(structure);
+		return true;
 	}
 
 	fillCell(x, y, structure) {
@@ -37,8 +48,10 @@ class Grid {
 
 	removeAt(x, y) {
 		const c = this.getCell(x, y);
-		if(c.valid && !c.available)
-			c.structure.remove();
+		if(c.valid && !c.available) {
+			this.structures.delete(c.structure);
+			c.structure.emptyCells();
+		}
 	}
 
 	emptyCell(x, y) {

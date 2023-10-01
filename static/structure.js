@@ -21,30 +21,18 @@ class Structure {
 		return canPlace;
 	}
 
-	placeAt(grid, x, y) {
-		if(!this.canPlaceAt(grid, x, y))
-			return false;
-		
+	fillCells(grid, x, y) {
 		this.forEach((cx, cy) => grid.fillCell(x + cx, y + cy, this));
 		this.grid =  grid;
 		this.x = x;
 		this.y = y;
-		return true;
 	}
 
-	remove() {
+	emptyCells() {
 		this.forEach((cx, cy) => this.grid.emptyCell(this.x + cx, this.y + cy));
 		this.grid = null;
 		this.x = null;
 		this.y = null;
-	}
-
-	produces(r) {
-		return this.produces[r] || 0;
-	}
-
-	consumes(r) {
-		return this.consumes[r] || 0;
 	}
 
 	forEach(f) {
@@ -75,11 +63,11 @@ class Structure {
 		return this.props.centre;
 	}
 
-	get produces() {
-		return this.props.produces;
+	produces(r) {
+		return this.props.produces[r] || 0;
 	}
 
-	get consumes() {
-		return this.props.consumes;
+	consumes(r) {
+		return this.props.consumes[r] || 0;
 	}
 }

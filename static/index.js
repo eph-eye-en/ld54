@@ -1,8 +1,9 @@
 const mainGrid = new Grid(5, 5);
 let structureTypes = {};
 let hotbarItems = ["OxygenProducer", "Generator"];
+let gridConstraints;
 
-let ui, gridDrawer, hotbar;
+let ui, constraintDrawer, gridDrawer, hotbar;
 
 function preload() {
 	preloadConfig();
@@ -11,19 +12,35 @@ function preload() {
 function setup() {
 	let cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
-	structureTypes = parseStructureTypes();
 
-	let stack = new Stack(STACK_VERT, [0.7, 0.1, 0.2]);
+	structureTypes = parseStructureTypes();
+	gridConstraints = {
+	resources: [
+		{ res: "Oxygen", min: 4 },
+		{ res: "Electricity", min: 0 },
+	],
+	structures: [
+		{ struct: structureTypes["OxygenProducer"], min: 1 },
+	],
+};
+
+	const stack1 = new Stack(STACK_HORIZ, [0.3, 0.7]);
+
+	constraintDrawer = new GridConstraintDrawer(mainGrid, gridConstraints, 30);
+	stack1.children[0] = constraintDrawer;
+
+	const stack2 = new Stack(STACK_VERT, [0.7, 0.1, 0.2]);
+	stack1.children[1] = stack2;
 
 	hotbar = new Hotbar(structureTypes, hotbarItems);
 	hotbar.onMousePressed = hotbarPressed;
-	stack.children[2] = hotbar;
+	stack2.children[2] = hotbar;
 
 	gridDrawer = new GridDrawer(mainGrid, getSelectedStructure());
 	gridDrawer.onMousePressed = gridCellPressed;
-	stack.children[0] = gridDrawer;
+	stack2.children[0] = gridDrawer;
 
-	ui = new Ui(30, 30, width - 60, height - 60, stack);
+	ui = new Ui(30, 30, width - 60, height - 60, stack1);
 }
 
 function draw() {
@@ -49,7 +66,7 @@ function hotbarPressed(idx) {
 
 function gridCellPressed(cx, cy) {
 	if(mouseButton === LEFT)
-		getSelectedStructure().copy().placeAt(mainGrid, cx, cy);
+		mainGrid.placeAt(cx, cy, getSelectedStructure().copy());
 	else if(mouseButton === RIGHT)
 		mainGrid.removeAt(cx, cy);
 }

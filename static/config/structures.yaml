@@ -6,12 +6,14 @@ OxygenProducer:
     O-
     X-
   produces:
-    oxygen: 2
+    Oxygen: 2
   consumes:
-    electricity: 1
+    Electricity: 1
 Generator:
   name: Generator
   colour: [255, 255, 0]
   shape: |
     XX
     XX
+  produces:
+    Electricity: 2

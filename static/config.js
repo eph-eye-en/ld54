@@ -13,6 +13,10 @@ function parseStructureTypes() {
 			parseStructureShape(str.shape);
 		str.shape = shape;
 		str.centre = centre;
+		if(!str.produces)
+			str.produces = {};
+		if(!str.consumes)
+			str.consumes = {};
 		types[s] = new Structure(str);
 	}
 	return types;
