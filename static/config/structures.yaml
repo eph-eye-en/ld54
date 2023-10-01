@@ -9,20 +9,105 @@ OxygenProducer:
     Oxygen: 2
   consumes:
     Electricity: 1
+
+OxygenProducerV2:
+  name: Oxygen Producer V2
+  colour: [0, 153, 153]
+  shape: |
+    X--
+    XOX
+    XXX
+  produces:
+    Oxygen: 5
+  consumes:
+    Electricity: 2
+
 Generator:
   name: Generator
   colour: [255, 255, 0]
   shape: |
-    XX
+    OX
     XX
   produces:
     Electricity: 2
+
+GeneratorV2:
+  name: Generator V2
+  colour: [255, 128, 0]
+  shape: |
+    XXX
+    XOX
+    XXX
+  produces:
+  Electricity: 5
+
 Plants:
   name: Plants
   colour: [50, 255, 50]
   shape: |
     XX
-    -O
+    XO
     -X
   produces:
+    Oxygen: 1
+
+Operations:
+  name: Operations
+  colour: [0, 0, 255]
+  shape: |
+    X--
+    X--
+    OXX
+  consumes:
+    Electricity: 1
+
+OperationsV2:
+  name: Manned Operations
+  colour: [100, 100, 255]
+  shape: |
+    X--
+    XO-
+    XXX
+  consumes:
+    Electricity: 1
+
+Medical:
+  name: Medical Bay
+  colour: [255,0,0]
+  shape: |
+    -X-
+    XOX
+    -X-  
+  consumes:
+    Electricity: 1
+
+Thrusters:
+  name: Thrusters
+  colour: [120, 0, 120]
+  shape: |
+    XOX
+    -X-
+  consumes:
+    Electricity: 1
+
+Factory:
+  name: Factory
+  colour: [120, 0, 0]
+  shape: |
+    XXX
+    XXX
+    XOX
+    XXX
+    XXX
+  consumes:
+    Electricity: 2
+
+Quarters:
+  name: Quarters
+  colour: [255, 0, 255]
+  shape: |
+    XXX
+    XOX
+    -X-
+  consumes:
     Oxygen: 1
