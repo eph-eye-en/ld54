@@ -110,11 +110,11 @@ class UiManager {
 		stack1.children[1] = stack2;
 		stack2.children[0] = this.levelManager.gridDrawer;
 		stack2.children[2] = this.levelManager.hotbar;
-		const modal = new Button(
-			"Continue?",
-			() => this.loadUi(this.levelsMenu),
-			[100,100,200],
-			[50,50,140]);
+
+		const modal = this.createModal(
+			"Complete", "Level complete!\nGood work", "Continue",
+			() => this.loadUi(this.levelsMenu))
+
 		const popup = new Popup(0.3, 0.3, stack1, modal);
 		const root = this.wrapWithTitleBar("Level", popup,
 			() => this.loadUi(this.levelsMenu));
@@ -125,6 +125,28 @@ class UiManager {
 		const th = this.theme.text;
 		const body = new TextBox(text, th.colour, th.size, LEFT, TOP);
 		return this.wrapWithTitleBar(title, body, onClose);
+	}
+
+	createModal(title, body, buttonText, action) {
+		const th = this.theme;
+
+		const stack1 = new Stack(STACK_VERT, [0.25, 0.5, 0.25]);
+		stack1.bgColour = this.theme.popupBgColour;
+
+		const tb1 = new TextBox(title, th.text.colour, th.text.size);
+		tb1.style = BOLDITALIC;
+		tb1.bgColour = this.theme.titleBar.background;
+		stack1.children[0] = tb1;
+		
+		const tb2 = new TextBox(body, th.text.colour, th.text.size);
+		stack1.children[1] = tb2;
+		
+		const stack2 = new Stack(STACK_HORIZ, [0.6, 0.4]);
+		stack1.children[2] = stack2;
+		const btn = this.createTransparentButton(buttonText, action);
+		stack2.children[1] = btn;
+
+		return stack1;
 	}
 
 	wrapWithTitleBar(title, child, onClose) {

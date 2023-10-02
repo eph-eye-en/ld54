@@ -1,4 +1,5 @@
 bgColour: [60, 60, 120, 100]
+popupBgColour: [60, 60, 120, 210]
 titleBar:
   background: [60, 60, 160, 200]
   weight: 0.05
