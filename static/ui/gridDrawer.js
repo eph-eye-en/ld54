@@ -40,14 +40,32 @@ class GridDrawer extends UiElement {
 				  h / 2 - (g.height - 1) / 2 * cellSize);
 		g.forEach((c, cx, cy) => {
 			stroke(200);
-			strokeWeight(1);
-			if(c.available)
+			if(c.available) {
+				strokeWeight(1);
 				fill(200, 70);
-			else
+			}
+			else {
+				strokeWeight(3);
 				fill(c.structure.colour);
+			}
+			const { tl, tr, br, bl, top, right, bottom, left } =
+				this.getCellEdges(g, c, cx, cy, cellSize / 8);
 			rect(cx * cellSize, cy * cellSize,
 				cellSize, cellSize,
-				cellSize / 8);
+				tl, tr, br, bl);
+			noStroke();
+			if(top)
+				rect(cx * cellSize, (cy - 1/2) * cellSize,
+					cellSize * 0.8, cellSize * 0.05);
+			if(right)
+				rect((cx + 1/2) * cellSize, cy * cellSize,
+					cellSize * 0.05, cellSize * 0.8);
+			if(bottom)
+				rect(cx * cellSize, (cy + 1/2) * cellSize,
+					cellSize * 0.8, cellSize * 0.05);
+			if(left)
+				rect((cx - 1/2) * cellSize, cy * cellSize,
+					cellSize * 0.05, cellSize * 0.8);
 		});
 
 		const hov = this.getHoveredCell(x, y, w, h, mx, my);
@@ -70,6 +88,35 @@ class GridDrawer extends UiElement {
 		}
 
 		pop();
+	}
+
+	getCellEdges(grid, c, cx, cy, value) {
+		let tl, tr, br, bl;
+		tl = tr = br = bl = value;
+		const topCell = grid.getCell(cx, cy - 1);
+		const top = topCell.valid && !topCell.available
+			&& topCell.structure == c.structure;
+		if(top)
+			tl = tr = 0;
+		const rightCell = grid.getCell(cx + 1, cy);
+		const right = rightCell.valid && !rightCell.available
+			&& rightCell.structure == c.structure;
+		if(right)
+			tr = br = 0;
+		const bottomCell = grid.getCell(cx, cy + 1);
+		const bottom = bottomCell.valid && !bottomCell.available
+			&& bottomCell.structure == c.structure;
+		if(bottom)
+			bl = br = 0;
+		const leftCell = grid.getCell(cx - 1, cy);
+		const left = leftCell.valid && !leftCell.available
+			&& leftCell.structure == c.structure;
+		if(left)
+			tl = bl = 0;
+		return {
+			tl, tr, bl, br,
+			top, bottom, left, right,
+		};
 	}
 
 	mousePressed(x, y, w, h, mx, my) {
