@@ -60,16 +60,16 @@ class GridDrawer extends UiElement {
 				noStroke();
 				if(top)
 					rect(cx * cellSize, (cy - 1/2) * cellSize,
-						cellSize * 0.8, cellSize * 0.05);
+						cellSize * 0.8, 4);
 				if(right)
 					rect((cx + 1/2) * cellSize, cy * cellSize,
-						cellSize * 0.05, cellSize * 0.8);
+						4, cellSize * 0.8);
 				if(bottom)
 					rect(cx * cellSize, (cy + 1/2) * cellSize,
-						cellSize * 0.8, cellSize * 0.05);
+						cellSize * 0.8, 4);
 				if(left)
 					rect((cx - 1/2) * cellSize, cy * cellSize,
-						cellSize * 0.05, cellSize * 0.8);
+						4, cellSize * 0.8);
 			}
 		});
 
