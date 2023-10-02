@@ -2,6 +2,11 @@ class LevelManager {
 	constructor(structureTypes, levels) {
 		this.structureTypes = structureTypes;
 		this.levels = levels;
+		this.levels.forEach(l => {
+			l.unlocked = false;
+			l.completed = false;
+		});
+		this.levels[0].unlocked = true;
 
 		this.onLevelCompleted = null;
 
@@ -16,6 +21,9 @@ class LevelManager {
 	}
 
 	loadLevel(idx) {
+		if(!this.levels[idx].unlocked)
+			return false;
+
 		this.levelIdx = idx;
 		const l = this.levels[idx];
 
@@ -28,12 +36,13 @@ class LevelManager {
 
 		this.constraintDrawer.grid = this.grid;
 		this.constraintDrawer.constraints = l.constraints;
+
+		return true;
 	}
 
 	loadNextLevel() {
 		if(this.levelIdx + 1 < this.levels.length) {
-			this.loadLevel(this.levelIdx + 1);
-			return true;
+			return this.loadLevel(this.levelIdx + 1);
 		}
 		return false;
 	}
@@ -59,9 +68,15 @@ class LevelManager {
 
 	checkComplete() {
 		const l = this.levels[this.levelIdx];
-		if(this.onLevelCompleted
-		&& GridConstraints.satisfies(this.grid, l.constraints))
-			this.onLevelCompleted(this.levelIdx);
+		if(GridConstraints.satisfies(this.grid, l.constraints)) {
+			this.levels[this.levelIdx].completed = true;
+			if(this.onLevelCompleted)
+				this.onLevelCompleted(this.levelIdx);
+		}
+	}
+
+	unlockLevel(idx) {
+		this.levels[idx].unlocked = true;
 	}
 
 	getSelectedStructure() {

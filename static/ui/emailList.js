@@ -1,14 +1,15 @@
 class EmailList extends UiElement {
-	constructor(levelNumber) {
+	constructor(levels) {
 		super();
 
-        this.levelNumber = levelNumber;
+        this.levels = levels;
         this.selectedIdx = 0;
+
+		this.onMousePressed = null;
 	}
 
 	getEmailHeight(w, h) {
-        return 300;
-		return Math.floor(h / (this.levelNumber+1));
+		return h / this.levels.length;
 	}
 
 	getHoveredIndex(x, y, w, h, px, py) {
@@ -18,10 +19,11 @@ class EmailList extends UiElement {
         py -= y;
 
 		if(px < 0 || px >= w
-		|| py < 0 || py >= this.levelNumber*EmailHeight)
+		|| py < 0 || py >= h)
 			return null;
 
-		return Math.floor(py / EmailHeight);
+		const i = Math.floor(py / EmailHeight);
+		return this.levels[i].unlocked ? i : null;
 	}
 
 	draw(x, y, w, h) {
@@ -34,7 +36,11 @@ class EmailList extends UiElement {
 		translate(w/2, emailHeight/2);
 	
 		const hovIdx = this.getHoveredIndex(x, y, w, h, mx, my);
-		for(let i = 0; i < this.levelNumber; i++) {
+		for(let i = 0; i < this.levels.length; i++) {
+			const l = this.levels[i]
+			if(!l.unlocked)
+				continue;
+
             if (i==hovIdx)
                 fill(230,230,255)
             else
@@ -42,7 +48,11 @@ class EmailList extends UiElement {
 			stroke(150);
 			strokeWeight(3);
 			rect(0, i * emailHeight, w, emailHeight, 8);
-            
+
+			fill(0);
+			noStroke();
+			textAlign(LEFT, CENTER);
+			text(`${i + 1}: ${l.name}`, -w / 2 + 10, i * emailHeight);
 		}
 	
 		noFill();

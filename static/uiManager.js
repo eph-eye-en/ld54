@@ -5,8 +5,7 @@ class UiManager {
 		this.w = w;
 		this.h = h;
 		this.levelManager = levelManager;
-		this.levelManager.onLevelCompleted =
-			() => this.levelCompletePopup.showPopup();
+		this.levelManager.onLevelCompleted = idx => this.onLevelCompleted(idx);
 
 		this.mainMenu = this.createMainMenu();
 		this.levelsMenu = this.createLevelsMenu();
@@ -65,7 +64,9 @@ class UiManager {
 		stack1.children[1] = stack2;
 		bannerstack.children[1] = new Square(RIGHT, TOP,
 			new Button("X", this.loadMainMenu.bind(this), [150, 50, 50],[225,50,50]));
-		stack2.children[0] = new EmailList(3);
+		const el = new EmailList(this.levelManager.levels);
+		el.onMousePressed = idx => this.loadLevel(idx);
+		stack2.children[0] = el;
 
 		return stack1;
 	}
@@ -105,8 +106,16 @@ class UiManager {
 	}
 
 	loadLevel(idx) {
-		this.ui.root = this.levelScreen;
-		this.levelCompletePopup.hidePopup();
-		this.levelManager.loadLevel(idx);
+		const succ = this.levelManager.loadLevel(idx);
+		if(succ) {
+			this.ui.root = this.levelScreen;
+			this.levelCompletePopup.hidePopup();
+		}
+	}
+
+	onLevelCompleted(idx) {
+		if(idx + 1 < this.levelManager.levels.length)
+			this.levelManager.unlockLevel(idx + 1);
+		this.levelCompletePopup.showPopup();
 	}
 }
