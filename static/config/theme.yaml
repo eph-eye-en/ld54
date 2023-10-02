@@ -1,1 +1,7 @@
+titleBar:
+  background: [60, 60, 160, 200]
+  weight: 0.05
 buttonHover: [100,100,200]
+text:
+  colour: [200, 200, 200]
+  size: 40

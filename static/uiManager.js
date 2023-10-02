@@ -65,19 +65,13 @@ class UiManager {
 	}
 
 	createLevelsMenu() {
-		
-		const stack1 = new Stack(STACK_VERT,[0.05,0.95]);
-		const bannerstack = new Stack(STACK_HORIZ,[0.9,0.1]);
-		const stack2 = new Stack(STACK_HORIZ,[0.3,0.7]);
-		stack1.children[0] = bannerstack;
-		stack1.children[1] = stack2;
-		bannerstack.children[1] = new Square(RIGHT, TOP,
-			new Button("X", this.loadMainMenu.bind(this), [150, 50, 50],[225,50,50]));
+		const stack = new Stack(STACK_HORIZ,[0.3,0.7]);
 		const el = new EmailList(this.levelManager.levels);
 		el.onMousePressed = idx => this.loadLevel(idx);
-		stack2.children[0] = el;
+		stack.children[0] = el;
 
-		return stack1;
+		return this.wrapWithTitleBar("Levels", stack,
+			() => this.loadMainMenu());
 	}
 
 	createLevelScreen() {
@@ -94,16 +88,37 @@ class UiManager {
 			[50,50,140]);
 		const popup = new Popup(0.3, 0.3, stack1, modal);
 		const root =
-			this.wrapWithCloseButton(popup, this.loadLevelsMenu.bind(this));
+			this.wrapWithTitleBar("Level", popup, () => this.loadLevelsMenu());
 		return { root, popup };
 	}
 
-	wrapWithCloseButton(child, onClose) {
-		const stack = new Stack(STACK_VERT, [0.05, 0.95]);
-		stack.children[0] = new Square(RIGHT, TOP,
-			new Button("X", onClose, [120, 50, 50],[200,50,50]));
-		stack.children[1] = child;
-		return stack;
+	createTextScreen(title, text, onClose) {
+		const th = this.theme.text;
+		const body = new TextBox(text, th.colour, th.size, LEFT, TOP);
+		return this.wrapWithTitleBar(title, body, onClose);
+	}
+
+	wrapWithTitleBar(title, child, onClose) {
+		const th = this.theme;
+
+		const stack1 = new Stack(STACK_VERT,
+			[th.titleBar.weight, 1 - th.titleBar.weight]);
+			
+		const stack2 = new Stack(STACK_HORIZ,
+			[1 - th.titleBar.weight, th.titleBar.weight]);
+		stack2.bgColour = this.theme.titleBar.background;
+
+		const tb = new TextBox(title, th.text.colour, th.text.size,
+			LEFT, CENTER);
+		tb.style = BOLDITALIC;
+		stack2.children[0] = tb;
+
+		stack2.children[1] = new Square(RIGHT, TOP,
+			new Button("X", onClose, [120, 50, 50], [200, 50, 50]));
+
+		stack1.children[0] = stack2;
+		stack1.children[1] = child;
+		return stack1;
 	}
 
 	loadMainMenu() {

@@ -8,6 +8,8 @@ class Stack extends UiElement {
 		this.direction = direction;
 		this.weightings = weightings;
 
+		this.bgColour = [0, 0];
+
 		this.children = this.weightings.map(() => null);
 	}
 
@@ -16,6 +18,10 @@ class Stack extends UiElement {
 	}
 
 	draw(x, y, w, h) {
+		rectMode(CORNER);
+		fill(this.bgColour);
+		noStroke();
+		rect(x, y, w, h);
 		this.forEach(x, y, w, h, (c, cx, cy, cw, ch) => c.draw(cx, cy, cw, ch));
 	}
 
