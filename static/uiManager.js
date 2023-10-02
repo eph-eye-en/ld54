@@ -15,8 +15,8 @@ class UiManager {
 		this.levelCompletePopup = ls.popup;
 		this.controlsScreen = this.createTextScreen(
 			"Controls", this.theme.controls, () => this.loadUi(this.mainMenu));
-		this.creditsScreen = this.createTextScreen(
-			"Credits", this.theme.credits, () => this.loadUi(this.mainMenu));
+		this.aboutScreen = this.createTextScreen(
+			"About", this.theme.about, () => this.loadUi(this.mainMenu));
 
 		this.ui = new Ui(x, y, w, h, this.mainMenu);
 	}
@@ -58,8 +58,8 @@ class UiManager {
 		but.fontSize = 60;
 		stack2.children[2] = but;
 
-		but = this.createTransparentButton("Credits",
-			() => this.loadUi(this.creditsScreen));
+		but = this.createTransparentButton("About",
+			() => this.loadUi(this.aboutScreen));
 		but.fontSize = 60;
 
 		stack2.children[3] = but;
@@ -109,6 +109,7 @@ class UiManager {
 
 		const stack1 = new Stack(STACK_VERT,
 			[th.titleBar.weight, 1 - th.titleBar.weight]);
+		stack1.bgColour = th.bgColour;
 			
 		const stack2 = new Stack(STACK_HORIZ,
 			[1 - th.titleBar.weight, th.titleBar.weight]);

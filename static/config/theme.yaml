@@ -1,3 +1,4 @@
+bgColour: [60, 60, 120, 100]
 titleBar:
   background: [60, 60, 160, 200]
   weight: 0.05
@@ -14,7 +15,12 @@ controls: >
 
   Press R to rotate a structure before placing.
 
-credits: >
+about: >
   Space LTD was made for Ludum Dare 54 with the theme of 'Limited Space'.
 
+
   It was made by the people at fency.fun. Check it out for more fun projects.
+
+
+  It's written with p5.js, and all of the code is available at
+  github.com/eph-eye-en/ld54.
