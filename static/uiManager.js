@@ -71,14 +71,37 @@ class UiManager {
 	}
 
 	createLevelsMenu() {
-		const stack = new Stack(STACK_HORIZ,[0.3,0.7]);
-		const el = new EmailList(this.levelManager.levels);
-		el.onMousePressed = idx => this.loadLevel(idx);
-		stack.children[0] = el;
+		// for(i=0; 0<this.levelManager.levels; i++)
+		// {
+		// 	if this.levelManager.levels[i]
 
-		return this.wrapWithTitleBar("Levels", stack,
+		// }
+
+		const stack1 = new Stack(STACK_HORIZ,[0.3,0.025,0.675]);
+		const stack2 = new Stack(STACK_VERT,[0.02,0.03,0.03,0.03,0.05,0.52,0.1,0.02]);
+		stack1.children[2] = stack2;
+		const stack3 = new Stack(STACK_HORIZ,[0.58,0.4,0.02]);
+		
+		stack2.children[1] = new TextBox("To: Underpaid Spacestation contractor 402",20,40);
+		stack2.children[2] = new TextBox("From: Space Captain Big Boss Man",20,40);
+		stack2.children[3] = new TextBox("Subject: Build me a space station!!!",20,40);
+		stack2.children[5] = new TextBox(this.levelManager.levels[0].description,20,40);
+		stack2.children[6] = stack3;
+
+		stack3.children[1] = new Button("Start Level",() => this.loadLevel(0),[50,200,50],[20,255,20])
+
+		const el = new EmailList(this.levelManager.levels);
+		el.onMousePressed = idx => {
+			stack2.children[5].text = this.levelManager.levels[idx].description;
+
+			stack3.children[1].clickedEvent = () => this.loadLevel(idx);
+		};
+		stack1.children[0] = el;
+		stack1.bgColour = 220;
+		return this.wrapWithTitleBar("Levels", stack1,
 			() => this.loadUi(this.mainMenu));
 	}
+	
 
 	createLevelScreen() {
 		const stack1 = new Stack(STACK_HORIZ, [0.3, 0.7,0.1]);

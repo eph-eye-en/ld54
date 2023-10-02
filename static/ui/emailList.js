@@ -9,7 +9,7 @@ class EmailList extends UiElement {
 	}
 
 	getEmailHeight(w, h) {
-		return h / this.levels.length;
+		return 0.9* h / this.levels.length;
 	}
 
 	getHoveredIndex(x, y, w, h, px, py) {
@@ -69,7 +69,10 @@ class EmailList extends UiElement {
 
 	mousePressed(x, y, w, h, mx, my) {
 		const hovIdx = this.getHoveredIndex(x, y, w, h, mx, my);
-		if(hovIdx != null && this.onMousePressed)
-			this.onMousePressed(hovIdx);
+		if(hovIdx != null){
+			this.selectedIdx = hovIdx;
+			if (this.onMousePressed)
+				this.onMousePressed(hovIdx);
+		}
 	}
 }

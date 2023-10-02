@@ -10,12 +10,16 @@
     resources:
       Oxygen: 2
       Electricity: 0
-  descrition: |
+  description: |
     Good morning, new recruit,
+    
     Congratulations on landing your first job as an asteroid base station architect! Now I know you were top of the class at the space architect academy, but you have a lot to learn until you can say the same here. 
+    
     To get you started, we're going to need to install an operations module and a quarters module as our living spaces. We're also going to need some oxygen modules, which in turn require electricity modules to function. 
+    
     It's also worth bearing in mind that electricity is available from any location as long as there is at least one electrical module installed somewhere on the ship. 
     That's about all there is to it, so I'll leave the rest up to you. 
+    
     Good luck, and I look forward to seeing you prove yourself!
 
 
@@ -34,9 +38,12 @@
       OxygenProducer: 2
       Generator: 4
   description: |
-    Good afternoon recruit, 
+    Good afternoon recruit,
+
     Nice job on the previous bases! We've had some feedback saying that the oxygen systems are struggling due to having to share electricity with operations, so we've added some plants to your inventory. 
+    
     These can produce oxygen without needing electricity, although the process is slower and less efficient so you will likely want to use them to supplement the oxygen systems rather than replace them. 
+    
     It's also been pointed out that without living quarters, our residents are having to sleep in the operations room which isn't ideal, so we're going to add some quarters.
 
 
@@ -55,7 +62,10 @@
       Electricity: 0
   description: |
     Good evening recruit,
+
     You're an old hand at this now! We have received some feedback from the inhabitants of the previous stations, and they are loving the addition of the plants. 
+    
     However, they felt the stations would benefit from being not quite so...well, stationary. So let's make these things move! In order to do this, we'll need to add some thrusters. 
+    
     Anyway, you've done well so far so I'll leave the rest in your capable hands.
 

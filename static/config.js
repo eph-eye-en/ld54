@@ -58,6 +58,7 @@ function parseLevels() {
 			shape: parseShape(l.shape).shape,
 			structures: l.structures,
 			constraints: parseGridConstraints(l.constraints),
+			description: l.description,
 		});
 	}
 	return levels;
