@@ -1,6 +1,8 @@
 OxygenProducer:
   name: Oxygen Producer
-  colour: [0, 100, 255]
+  appearance:
+    fill: [0, 100, 255]
+    accent: [0, 50, 150]
   shape: |
     XX
     O-
@@ -12,7 +14,9 @@ OxygenProducer:
 
 OxygenProducerV2:
   name: Oxygen Producer V2
-  colour: [0, 153, 153]
+  appearance:
+    fill: [0, 153, 153]
+    accent: [0, 60, 60]
   shape: |
     X--
     XOX
@@ -24,7 +28,9 @@ OxygenProducerV2:
 
 Generator:
   name: Generator
-  colour: [255, 255, 0]
+  appearance:
+    fill: [255, 255, 0]
+    accent: [130, 130, 0]
   shape: |
     OX
     XX
@@ -33,7 +39,9 @@ Generator:
 
 GeneratorV2:
   name: Generator V2
-  colour: [255, 128, 0]
+  appearance:
+    fill: [255, 128, 0]
+    accent: [130, 60, 0]
   shape: |
     XXX
     XOX
@@ -43,7 +51,9 @@ GeneratorV2:
 
 Plants:
   name: Plants
-  colour: [50, 255, 50]
+  appearance:
+    fill: [50, 255, 50]
+    accent: [25, 130, 25]
   shape: |
     XX
     XO
@@ -53,7 +63,9 @@ Plants:
 
 Operations:
   name: Operations
-  colour: [0, 0, 255]
+  appearance:
+    fill: [0, 0, 255]
+    accent: [0, 0, 130]
   shape: |
     X--
     X--
@@ -63,7 +75,9 @@ Operations:
 
 OperationsV2:
   name: Manned Operations
-  colour: [100, 100, 255]
+  appearance:
+    fill: [100, 100, 255]
+    accent: [50, 50, 130]
   shape: |
     X--
     XO-
@@ -73,7 +87,9 @@ OperationsV2:
 
 Medical:
   name: Medical Bay
-  colour: [255,0,0]
+  appearance:
+    fill: [255,0,0]
+    accent: [130,0,0]
   shape: |
     -X-
     XOX
@@ -83,7 +99,9 @@ Medical:
 
 Thrusters:
   name: Thrusters
-  colour: [120, 0, 120]
+  appearance:
+    fill: [120, 0, 120]
+    accent: [60, 0, 60]
   shape: |
     XOX
     -X-
@@ -92,7 +110,9 @@ Thrusters:
 
 Factory:
   name: Factory
-  colour: [120, 0, 0]
+  appearance:
+    fill: [120, 0, 0]
+    accent: [60, 0, 0]
   shape: |
     XXX
     XXX
@@ -104,7 +124,9 @@ Factory:
 
 Quarters:
   name: Quarters
-  colour: [255, 0, 255]
+  appearance:
+    fill: [255, 0, 255]
+    accent: [130, 0, 130]
   shape: |
     XXX
     XOX

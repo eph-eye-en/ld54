@@ -84,8 +84,8 @@ class Structure {
 		return this.props.slug;
 	}
 
-	get colour() {
-		return this.props.colour;
+	get appearance() {
+		return this.props.appearance;
 	}
 
 	get shape() {

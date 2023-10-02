@@ -39,33 +39,38 @@ class GridDrawer extends UiElement {
 		translate(w / 2 - (g.width - 1) / 2 * cellSize,
 				  h / 2 - (g.height - 1) / 2 * cellSize);
 		g.forEach((c, cx, cy) => {
-			stroke(200);
 			if(c.available) {
+				stroke(200);
 				strokeWeight(1);
 				fill(200, 70);
+				rect(cx * cellSize, cy * cellSize,
+					cellSize * 0.95, cellSize * 0.95,
+					cellSize / 8);
 			}
 			else {
+				stroke(c.structure.appearance.accent);
 				strokeWeight(3);
-				fill(c.structure.colour);
+				fill(c.structure.appearance.fill);
+
+				const { tl, tr, br, bl, top, right, bottom, left } =
+					this.getCellEdges(g, c, cx, cy, cellSize / 8);
+				rect(cx * cellSize, cy * cellSize,
+					cellSize, cellSize,
+					tl, tr, br, bl);
+				noStroke();
+				if(top)
+					rect(cx * cellSize, (cy - 1/2) * cellSize,
+						cellSize * 0.8, cellSize * 0.05);
+				if(right)
+					rect((cx + 1/2) * cellSize, cy * cellSize,
+						cellSize * 0.05, cellSize * 0.8);
+				if(bottom)
+					rect(cx * cellSize, (cy + 1/2) * cellSize,
+						cellSize * 0.8, cellSize * 0.05);
+				if(left)
+					rect((cx - 1/2) * cellSize, cy * cellSize,
+						cellSize * 0.05, cellSize * 0.8);
 			}
-			const { tl, tr, br, bl, top, right, bottom, left } =
-				this.getCellEdges(g, c, cx, cy, cellSize / 8);
-			rect(cx * cellSize, cy * cellSize,
-				cellSize, cellSize,
-				tl, tr, br, bl);
-			noStroke();
-			if(top)
-				rect(cx * cellSize, (cy - 1/2) * cellSize,
-					cellSize * 0.8, cellSize * 0.05);
-			if(right)
-				rect((cx + 1/2) * cellSize, cy * cellSize,
-					cellSize * 0.05, cellSize * 0.8);
-			if(bottom)
-				rect(cx * cellSize, (cy + 1/2) * cellSize,
-					cellSize * 0.8, cellSize * 0.05);
-			if(left)
-				rect((cx - 1/2) * cellSize, cy * cellSize,
-					cellSize * 0.05, cellSize * 0.8);
 		});
 
 		const hov = this.getHoveredCell(x, y, w, h, mx, my);
@@ -73,7 +78,7 @@ class GridDrawer extends UiElement {
 			strokeWeight(3);
 			if(this.hoverStructure.canPlaceAt(this.grid, hov.x, hov.y)) {
 				stroke(255);
-				fill(...this.hoverStructure.colour, 90);
+				fill(...this.hoverStructure.appearance.fill, 90);
 			}
 			else {
 				stroke(255, 20, 20);
