@@ -18,6 +18,9 @@ function parseStructureTypes() {
 	for(let s in structures) {
 		const str = structures[s];
 		str.slug = s;
+		loadImage(`images/${str.appearance.image}`,
+			img => onStructureImageLoaded(str, img));
+		str.appearance.image = null;
 		const { shape, centre } =
 			parseShape(str.shape);
 		str.shape = shape;
@@ -29,6 +32,13 @@ function parseStructureTypes() {
 		types[s] = new Structure(str);
 	}
 	return types;
+}
+
+function onStructureImageLoaded(str, img) {
+	const g = createGraphics(img.width, img.height);
+	g.tint(str.appearance.accent);
+	g.image(img, 0, 0);
+	str.appearance.image = g;
 }
 
 function parseLevels() {

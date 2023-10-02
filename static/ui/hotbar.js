@@ -33,10 +33,12 @@ class Hotbar extends UiElement {
 	draw(x, y, w, h) {
 		const numSlots = this.items.length;
 		const slotSize = this.getSlotSize(w, h);
+		const iconSize = slotSize * 0.5;
 		let { x: mx, y: my } = getLocalCoords(mouseX, mouseY);
 
 		push();
 		rectMode(CENTER);
+		imageMode(CENTER);
 		translate(x, y);
 		translate(w / 2 - (numSlots - 1) / 2 * slotSize, h / 2);
 	
@@ -51,6 +53,8 @@ class Hotbar extends UiElement {
 			stroke(s.appearance.accent);
 			strokeWeight(1);
 			square(i * slotSize, 0, slotSize * 0.8, slotSize * 0.8 / 5);
+			if(s.appearance.image != null)
+				image(s.appearance.image, i * slotSize, 0, iconSize, iconSize);
 		}
 	
 		const hovIdx = this.getHoveredIndex(x, y, w, h, mx, my);

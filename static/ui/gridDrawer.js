@@ -31,10 +31,12 @@ class GridDrawer extends UiElement {
 		const g = this.grid;
 		const cellSize = this.getCellSize(w, h);
 		const cornerRadius = cellSize / 7;
+		const iconScale = cellSize * 0.5;
 		let { x: mx, y: my } = getLocalCoords(mouseX, mouseY);
 
 		push();
 		rectMode(CENTER);
+		imageMode(CENTER);
 		translate(x, y);
 		translate(w / 2 - (g.width - 1) / 2 * cellSize,
 				  h / 2 - (g.height - 1) / 2 * cellSize);
@@ -48,9 +50,10 @@ class GridDrawer extends UiElement {
 					cellSize / 8);
 			}
 			else {
-				stroke(c.structure.appearance.accent);
+				const app = c.structure.appearance;
+				stroke(app.accent);
 				strokeWeight(3);
-				fill(c.structure.appearance.fill);
+				fill(app.fill);
 
 				const { tl, tr, br, bl, top, right, bottom, left } =
 					this.getCellEdges(g, c, cx, cy, cellSize / 8);
@@ -70,6 +73,10 @@ class GridDrawer extends UiElement {
 				if(left)
 					rect((cx - 1/2) * cellSize, cy * cellSize,
 						4, cellSize * 0.8);
+				if(app.image != null)
+					image(app.image,
+						cx * cellSize, cy * cellSize,
+						iconScale, iconScale);
 			}
 		});
 

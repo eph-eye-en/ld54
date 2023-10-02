@@ -3,6 +3,7 @@ OxygenProducer:
   appearance:
     fill: [0, 100, 255]
     accent: [0, 50, 150]
+    image: "O2.png"
   shape: |
     XX
     O-
@@ -17,6 +18,7 @@ OxygenProducerV2:
   appearance:
     fill: [0, 153, 153]
     accent: [0, 60, 60]
+    image: "O2.png"
   shape: |
     X--
     XOX
@@ -31,6 +33,7 @@ Generator:
   appearance:
     fill: [255, 255, 0]
     accent: [130, 130, 0]
+    image: "electricity.png"
   shape: |
     OX
     XX
@@ -42,6 +45,7 @@ GeneratorV2:
   appearance:
     fill: [255, 128, 0]
     accent: [130, 60, 0]
+    image: "electricity.png"
   shape: |
     XXX
     XOX
@@ -54,6 +58,7 @@ Plants:
   appearance:
     fill: [50, 255, 50]
     accent: [25, 130, 25]
+    image: "leaf.png"
   shape: |
     XX
     XO
@@ -66,6 +71,7 @@ Operations:
   appearance:
     fill: [0, 0, 255]
     accent: [0, 0, 130]
+    image: "wheel.png"
   shape: |
     X--
     X--
@@ -78,6 +84,7 @@ OperationsV2:
   appearance:
     fill: [100, 100, 255]
     accent: [50, 50, 130]
+    image: "wheel.png"
   shape: |
     X--
     XO-
@@ -90,6 +97,7 @@ Medical:
   appearance:
     fill: [255,0,0]
     accent: [130,0,0]
+    image: "plus.png"
   shape: |
     -X-
     XOX
@@ -102,6 +110,7 @@ Thrusters:
   appearance:
     fill: [120, 0, 120]
     accent: [60, 0, 60]
+    image: "thruster.png"
   shape: |
     XOX
     -X-
@@ -113,6 +122,7 @@ Factory:
   appearance:
     fill: [120, 0, 0]
     accent: [60, 0, 0]
+    image: "cog.png"
   shape: |
     XXX
     XXX
@@ -127,6 +137,7 @@ Quarters:
   appearance:
     fill: [255, 0, 255]
     accent: [130, 0, 130]
+    image: "bed.png"
   shape: |
     XXX
     XOX
