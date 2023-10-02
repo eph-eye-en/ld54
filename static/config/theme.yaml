@@ -5,3 +5,16 @@ buttonHover: [100,100,200]
 text:
   colour: [200, 200, 200]
   size: 40
+controls: >
+  Use the mouse to position each structure.
+
+  Left click to place the structure.
+
+  Right click to delete an existing structure.
+
+  Press R to rotate a structure before placing.
+
+credits: >
+  Space LTD was made for Ludum Dare 54 with the theme of 'Limited Space'.
+
+  It was made by the people at fency.fun. Check it out for more fun projects.

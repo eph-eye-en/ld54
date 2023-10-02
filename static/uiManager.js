@@ -13,6 +13,10 @@ class UiManager {
 		const ls = this.createLevelScreen();
 		this.levelScreen = ls.root;
 		this.levelCompletePopup = ls.popup;
+		this.controlsScreen = this.createTextScreen(
+			"Controls", this.theme.controls, () => this.loadUi(this.mainMenu));
+		this.creditsScreen = this.createTextScreen(
+			"Credits", this.theme.credits, () => this.loadUi(this.mainMenu));
 
 		this.ui = new Ui(x, y, w, h, this.mainMenu);
 	}
@@ -45,15 +49,17 @@ class UiManager {
 		stack1.children[1] = stack3;
 
 		var but = this.createTransparentButton("Play",
-			() => this.loadLevelsMenu());
+			() => this.loadUi(this.levelsMenu));
 		but.fontSize = 60;
 
 		stack2.children[1] = but;
-		but = this.createTransparentButton("Controls", () => this.loadLevel(0));
+		but = this.createTransparentButton("Controls",
+			() => this.loadUi(this.controlsScreen));
 		but.fontSize = 60;
 		stack2.children[2] = but;
 
-		but = this.createTransparentButton("Credits", () => this.loadLevel(1));
+		but = this.createTransparentButton("Credits",
+			() => this.loadUi(this.creditsScreen));
 		but.fontSize = 60;
 
 		stack2.children[3] = but;
@@ -71,7 +77,7 @@ class UiManager {
 		stack.children[0] = el;
 
 		return this.wrapWithTitleBar("Levels", stack,
-			() => this.loadMainMenu());
+			() => this.loadUi(this.mainMenu));
 	}
 
 	createLevelScreen() {
@@ -83,12 +89,12 @@ class UiManager {
 		stack2.children[2] = this.levelManager.hotbar;
 		const modal = new Button(
 			"Continue?",
-			() => this.loadLevelsMenu(),
+			() => this.loadUi(this.levelsMenu),
 			[100,100,200],
 			[50,50,140]);
 		const popup = new Popup(0.3, 0.3, stack1, modal);
-		const root =
-			this.wrapWithTitleBar("Level", popup, () => this.loadLevelsMenu());
+		const root = this.wrapWithTitleBar("Level", popup,
+			() => this.loadUi(this.levelsMenu));
 		return { root, popup };
 	}
 
@@ -121,8 +127,8 @@ class UiManager {
 		return stack1;
 	}
 
-	loadMainMenu() {
-		this.ui.root = this.mainMenu;
+	loadUi(root) {
+		this.ui.root = root;
 	}
 
 	loadLevelsMenu() {
