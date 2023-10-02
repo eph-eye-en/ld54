@@ -1,9 +1,10 @@
 class UiManager {
-	constructor(x, y, w, h, levelManager) {
+	constructor(x, y, w, h, theme, levelManager) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.theme = theme;
 		this.levelManager = levelManager;
 		this.levelManager.onLevelCompleted = idx => this.onLevelCompleted(idx);
 
@@ -29,6 +30,13 @@ class UiManager {
 			this.levelManager.rotatePressed();
 	}
 
+	createTransparentButton(text, onMousePressed) {
+		const b = new Button(text, onMousePressed, [0, 0],
+			this.theme.buttonHover);
+		b.outlineColour = [0, 0];
+		return b;
+	}
+
 	createMainMenu() {
 		const stack1 = new Stack(STACK_HORIZ,[0.4,0.6]);
 		const stack2 = new Stack(STACK_VERT,[0.5,0.2,0.2,0.2,0.1]);
@@ -36,22 +44,23 @@ class UiManager {
 		stack1.children[0] = stack2;
 		stack1.children[1] = stack3;
 
-		var but = new Button("Play", this.loadLevelsMenu.bind(this), [20,20,200,0],[100,100,200]);
-		but.outlineColour = [0,0,0,0];
+		var but = this.createTransparentButton("Play",
+			() => this.loadLevelsMenu());
 		but.fontSize = 60;
+
 		stack2.children[1] = but;
-		but = new Button("Level 1", ()=>this.loadLevel(0), [20,20,200,0],[100,100,200]);
-		but.outlineColour = [0,0,0,0];
+		but = this.createTransparentButton("Controls", () => this.loadLevel(0));
 		but.fontSize = 60;
 		stack2.children[2] = but;
-		but = new Button("Level 2", ()=>this.loadLevel(1), [20,20,200,0],[100,100,200]);
-		but.outlineColour = [0,0,0,0];
+
+		but = this.createTransparentButton("Credits", () => this.loadLevel(1));
 		but.fontSize = 60;
+
 		stack2.children[3] = but;
-		but = new Button("Space Ltd", ()=>this.loadLevel(2), [20,20,200,0],[100,100,200]);
-		but.outlineColour = [0,0,0,0];
+		but = this.createTransparentButton("Space Ltd", () => this.loadLevel(2));
 		but.fontSize = 60;
 		stack3.children[1] = but;
+
 		return stack1;
 	}
 

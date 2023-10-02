@@ -1,15 +1,21 @@
 let configStrings = {};
 
 function preloadConfig() {
+	configStrings.theme = loadStrings("config/theme.yaml");
 	configStrings.structures = loadStrings("config/structures.yaml");
 	configStrings.levels = loadStrings("config/levels.yaml");
 }
 
 function parseConfig() {
 	return {
+		theme: parseTheme(),
 		structureTypes: parseStructureTypes(),
 		levels: parseLevels(),
 	};
+}
+
+function parseTheme() {
+	return jsyaml.load(configStrings.theme.join("\n"));
 }
 
 function parseStructureTypes() {

@@ -19,11 +19,11 @@ function setup() {
 	uiX = (width - uiWidth) / 2;
 	uiY = (height - uiHeight) / 2;
 
-	const { structureTypes, levels } = parseConfig();
+	const { theme, structureTypes, levels } = parseConfig();
 	const levelManager = new LevelManager(structureTypes, levels);
 	uiManager = new UiManager(
 		padding, padding, uiWidth - padding * 2, uiHeight - padding * 2,
-		levelManager);
+		theme, levelManager);
 }
 
 function draw() {
