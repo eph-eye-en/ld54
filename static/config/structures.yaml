@@ -90,7 +90,7 @@ OperationsV2:
     XO-
     XXX
   consumes:
-    Electricity: 1
+    Electricity: 0
 
 Medical:
   name: Medical Bay

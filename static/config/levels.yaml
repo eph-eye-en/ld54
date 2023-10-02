@@ -1,15 +1,20 @@
 - name: "Introduction"
   shape: |
-    XX-
-    XXX
-    XXX
+    XXXXXX-
+    XXXXXXX
+    XXXXXXX
   structures:
   - OxygenProducer
   - Generator
+  - Operations
+  - Quarters
   constraints:
     resources:
-      Oxygen: 2
+      Oxygen: 1
       Electricity: 0
+    structures:
+      Quarters: 1
+      Operations: 1
   description: |
     Good morning, new recruit,
     
@@ -25,18 +30,22 @@
 
 - name: "Tessellate"
   shape: |
+    XXXXX
+    XXXXX
+    XXXXX
     XXXX-
-    XXXXX
-    XXXXX
-    XXXXX
-    XXXXX
+    XXXX-
   structures:
   - OxygenProducer
-  - Generator
+  - Plants
+  - Quarters
+  - OperationsV2
   constraints:
+    resources:
+      Oxygen: 1
     structures:
-      OxygenProducer: 2
-      Generator: 4
+      Quarters: 1
+      OperationsV2: 1
   description: |
     Good afternoon recruit,
 
@@ -49,17 +58,28 @@
 
 - name: "Green"
   shape: |
-    XXXXXXXXXXX
-    XXXXXXXXXXX
-    -X-X-X-X-X-
+    -----XXX
+    --XX-XXX
+    -XXXXXX-
+    XXXXXXX-
+    XXXXXXXX
+    -XXX-XXX
+    --X-----
   structures:
   - OxygenProducer
   - Generator
   - Plants
+  - Quarters
+  - OperationsV2
+  - Thrusters
   constraints:
     resources:
-      Oxygen: 5
-      Electricity: 0
+      Oxygen: 0
+    structures:
+      Generator: 1
+      OperationsV2: 1
+      Thrusters: 2
+      Quarters: 2
   description: |
     Good evening recruit,
 
