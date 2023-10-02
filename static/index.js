@@ -1,30 +1,44 @@
-const margin = 30;
+const padding = 30;
+let uiWidth, uiHeight, uiX, uiY;
 
 let uiManager;
+let bgImg;
 
 function preload() {
 	preloadConfig();
+	bgImg = loadImage("images/backdrop.png");
 }
 
 function setup() {
 	const cnv = createCanvas(innerWidth, innerHeight);
 	cnv.elt.addEventListener('contextmenu', event => event.preventDefault());
 
+	const s = Math.min(width / bgImg.width, height / bgImg.height);
+	uiWidth = bgImg.width * s;
+	uiHeight = bgImg.height * s;
+	uiX = (width - uiWidth) / 2;
+	uiY = (height - uiHeight) / 2;
+
 	const { structureTypes, levels } = parseConfig();
 	const levelManager = new LevelManager(structureTypes, levels);
 	uiManager = new UiManager(
-		margin, margin, width - margin * 2, height - margin * 2,
+		padding, padding, uiWidth - padding * 2, uiHeight - padding * 2,
 		levelManager);
 }
 
 function draw() {
-	background(51);
+	background(10, 10, 50);
+
+	translate(uiX, uiY);
+
+	imageMode(CORNER);
+	image(bgImg, 0, 0, uiWidth, uiHeight);
 
 	uiManager.draw();
 }
 
-function mousePressed(event) {
-	uiManager.mousePressed(mouseX, mouseY);
+function mousePressed() {
+	uiManager.mousePressed(mouseX - uiX, mouseY - uiY);
 }
 
 function keyPressed() {
