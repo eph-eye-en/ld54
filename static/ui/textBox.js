@@ -24,12 +24,9 @@ class TextBox extends UiElement {
 		textSize(this.fontSize);
 		textStyle(this.style);
 		textAlign(this.horizAlign, this.vertAlign);
-		const tx = this.horizAlign === LEFT ? x + this.padding
-				 : this.horizAlign === CENTER ? x + w / 2
-				 : x + w - this.padding;
 		const ty = this.vertAlign === TOP ? y + this.padding
 				 : this.vertAlign === CENTER ? y + h / 2
 				 : y + h - this.padding;
-		text(this.text, tx, ty, w - this.padding / 2);
+		text(this.text, x, ty, w - this.padding / 2);
 	}
 }

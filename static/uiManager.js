@@ -15,8 +15,8 @@ class UiManager {
 		this.levelCompletePopup = ls.popup;
 		this.controlsScreen = this.createTextScreen(
 			"Controls", this.theme.controls, () => this.loadUi(this.mainMenu));
-		this.creditsScreen = this.createTextScreen(
-			"Credits", this.theme.credits, () => this.loadUi(this.mainMenu));
+		this.aboutScreen = this.createTextScreen(
+			"About", this.theme.about, () => this.loadUi(this.mainMenu));
 
 		this.ui = new Ui(x, y, w, h, this.mainMenu);
 	}
@@ -44,28 +44,28 @@ class UiManager {
 	createMainMenu() {
 		const stack1 = new Stack(STACK_HORIZ,[0.4,0.6]);
 		const stack2 = new Stack(STACK_VERT,[0.5,0.2,0.2,0.2,0.1]);
-		const stack3 = new Stack(STACK_VERT,[0.1,0.3,0.6]);
 		stack1.children[0] = stack2;
-		stack1.children[1] = stack3;
 
 		var but = this.createTransparentButton("Play",
 			() => this.loadUi(this.levelsMenu));
 		but.fontSize = 60;
-
 		stack2.children[1] = but;
+
 		but = this.createTransparentButton("Controls",
 			() => this.loadUi(this.controlsScreen));
 		but.fontSize = 60;
 		stack2.children[2] = but;
 
-		but = this.createTransparentButton("Credits",
-			() => this.loadUi(this.creditsScreen));
+		but = this.createTransparentButton("About",
+			() => this.loadUi(this.aboutScreen));
 		but.fontSize = 60;
-
 		stack2.children[3] = but;
-		but = this.createTransparentButton("Space Ltd", () => this.loadLevel(2));
-		but.fontSize = 60;
-		stack3.children[1] = but;
+
+		const stack3 = new Stack(STACK_VERT,[0.15, 0.3, 0.55]);
+		stack1.children[1] = stack3;
+		const title = new TextBox("Space LTD", this.theme.text.colour, 90,
+			RIGHT, CENTER);
+		stack3.children[1] = title;
 
 		return stack1;
 	}
@@ -109,6 +109,7 @@ class UiManager {
 
 		const stack1 = new Stack(STACK_VERT,
 			[th.titleBar.weight, 1 - th.titleBar.weight]);
+		stack1.bgColour = th.bgColour;
 			
 		const stack2 = new Stack(STACK_HORIZ,
 			[1 - th.titleBar.weight, th.titleBar.weight]);
@@ -131,14 +132,10 @@ class UiManager {
 		this.ui.root = root;
 	}
 
-	loadLevelsMenu() {
-		this.ui.root = this.levelsMenu;
-	}
-
 	loadLevel(idx) {
 		const succ = this.levelManager.loadLevel(idx);
 		if(succ) {
-			this.ui.root = this.levelScreen;
+			this.loadUi(this.levelScreen);
 			this.levelCompletePopup.hidePopup();
 		}
 	}
