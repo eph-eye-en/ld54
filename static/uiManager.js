@@ -5,10 +5,14 @@ class UiManager {
 		this.w = w;
 		this.h = h;
 		this.levelManager = levelManager;
+		this.levelManager.onLevelCompleted =
+			() => this.levelCompletePopup.showPopup();
 
 		this.mainMenu = this.createMainMenu();
 		this.levelsMenu = this.createLevelsMenu();
-		this.levelScreen = this.createLevelScreen();
+		const ls = this.createLevelScreen();
+		this.levelScreen = ls.root;
+		this.levelCompletePopup = ls.popup;
 
 		this.ui = new Ui(x, y, w, h, this.mainMenu);
 	}
@@ -73,7 +77,15 @@ class UiManager {
 		stack1.children[1] = stack2;
 		stack2.children[0] = this.levelManager.gridDrawer;
 		stack2.children[2] = this.levelManager.hotbar;
-		return this.wrapWithCloseButton(stack1, this.loadLevelsMenu.bind(this));
+		const modal = new Button(
+			"Continue?",
+			() => this.loadLevelsMenu(),
+			[100,100,200],
+			[50,50,140]);
+		const popup = new Popup(0.3, 0.3, stack1, modal);
+		const root =
+			this.wrapWithCloseButton(popup, this.loadLevelsMenu.bind(this));
+		return { root, popup };
 	}
 
 	wrapWithCloseButton(child, onClose) {
@@ -94,6 +106,7 @@ class UiManager {
 
 	loadLevel(idx) {
 		this.ui.root = this.levelScreen;
+		this.levelCompletePopup.hidePopup();
 		this.levelManager.loadLevel(idx);
 	}
 }

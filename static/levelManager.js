@@ -3,6 +3,8 @@ class LevelManager {
 		this.structureTypes = structureTypes;
 		this.levels = levels;
 
+		this.onLevelCompleted = null;
+
 		this.gridDrawer = new GridDrawer();
 		this.hotbar = new Hotbar(structureTypes);
 		this.hotbar.onMousePressed = bindTo(this.hotbarPressed, this);
@@ -57,8 +59,9 @@ class LevelManager {
 
 	checkComplete() {
 		const l = this.levels[this.levelIdx];
-		if(GridConstraints.satisfies(this.grid, l.constraints))
-			console.log("Complete");
+		if(this.onLevelCompleted
+		&& GridConstraints.satisfies(this.grid, l.constraints))
+			this.onLevelCompleted(this.levelIdx);
 	}
 
 	getSelectedStructure() {
