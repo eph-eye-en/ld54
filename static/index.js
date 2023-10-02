@@ -25,10 +25,6 @@ function draw() {
 
 function mousePressed(event) {
 	uiManager.mousePressed(mouseX, mouseY);
-
-	if(mouseX >= 0 && mouseX < width
-	&& mouseY >= 0 && mouseY < height)
-		return false;
 }
 
 function keyPressed() {
